@@ -8,6 +8,8 @@ p {
     margin: 0;
 }
 
+a {}
+
 body {
     background: hsl(261, 48%, 33%);
     color: white;
@@ -32,13 +34,13 @@ nav {
     color: hsl(261, 48%, 33%);
 }
 
-li {
+nav li {
     list-style: none;
     display: inline-block;
     padding: 0 5px;
 }
 
-button {
+.cause-list button {
     background-color: hsl(261, 48%, 33%);
     color: #eee8ff;
     border: 2.5px solid #eee8ff;
@@ -48,7 +50,7 @@ button {
     transition: 20ms ease-in-out;
 }
 
-button:hover {
+.cause-list button:hover {
     background: white;
     border-color: hsl(261, 48%, 33%);
     color: darkslategray;
