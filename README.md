@@ -1,2 +1,2 @@
 # TrustChain-transparent-charity
-TrustChain-Transparency in charity 
+TrustChain - Transparency in Charity System
