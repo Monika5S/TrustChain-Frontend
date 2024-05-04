@@ -27,7 +27,7 @@ module.exports = {
       chainId: 324,
       zksync: true,
     },
-
+    //using hardhat local environment for test accounts
     hardhat: {
       chainId: 1337,
     },

@@ -1,7 +1,7 @@
 // import { ConnectWallet } from "@thirdweb-dev/react";
 import "./styles/Home.css";
 import { Route, Routes } from "react-router-dom";
-import { Home, Profile } from "./pages";
+import { Home, Profile, CreateCampaigns, CampaignDetails } from "./pages";
 import { Navbar, Sidebar } from "./components";
 
 export default function App() {
@@ -18,18 +18,24 @@ export default function App() {
 
     //   </div>
     // </main>
-    <div className="Container">
-      <div className="relative">
+    <div className="App d-flex">
+      <div className="d-sm-flex">
         <Sidebar />
       </div>
 
-      <div className="flex">
+      <div className="d-flex flex-column w-100">
         <Navbar />
-      </div>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+        <div className="d-flex justify-content-center align-items-center my-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+
+            <Route path="/create-campaign" element={<CreateCampaigns />} />
+            <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 }

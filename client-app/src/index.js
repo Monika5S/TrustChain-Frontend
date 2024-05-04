@@ -4,23 +4,26 @@ import App from "./App";
 // import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import { StateContextProvider } from "./context";
 import "./styles/globals.css";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
 // You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-// const activeChain = "ethereum";
+// desiredChainId={ChainId.Localhost}
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <ThirdwebProvider
-    // activeChain={activeChain}
+    activeChain="localhost"
+    clientId="ddd0702aa6546d7423a875009a9eb400"
     desiredChainId={ChainId.Localhost}
-    // clientId={process.env.REACT_APP_TEMPLATE_CLIENT_ID}
   >
     <Router>
-      <App />
+      <StateContextProvider>
+        <App />
+      </StateContextProvider>
     </Router>
   </ThirdwebProvider>
 );

@@ -19,4 +19,6 @@ a {
 body {
   color: #e7e8e8;
   background: #070707;
+
+  /* background: linear-gradient(rgb(214, 216, 255), rgb(153, 146, 255)); */
 }
