@@ -1,7 +1,13 @@
 // import { ConnectWallet } from "@thirdweb-dev/react";
 import "./styles/Home.css";
 import { Route, Routes } from "react-router-dom";
-import { Home, Profile, CreateCampaigns, CampaignDetails } from "./pages";
+import {
+  Home,
+  Profile,
+  CreateCampaigns,
+  CampaignDetails,
+  CooperativeStore,
+} from "./pages";
 import { Navbar, Sidebar } from "./components";
 
 export default function App() {
@@ -30,6 +36,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/cooperative-store" element={<CooperativeStore />} />
 
             <Route path="/create-campaign" element={<CreateCampaigns />} />
             <Route path="/campaign-details/:id" element={<CampaignDetails />} />

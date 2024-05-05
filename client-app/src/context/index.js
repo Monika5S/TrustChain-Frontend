@@ -1,9 +1,8 @@
 import React, { useContext, createContext } from "react";
-
 import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
 import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
-import { useMetamask } from "@thirdweb-dev/react";
+import { useMetamask, useDisconnect } from "@thirdweb-dev/react";
 
 const StateContext = createContext();
 
@@ -17,8 +16,8 @@ export const StateContextProvider = ({ children }) => {
   );
 
   const address = useAddress();
-
   const connect = useMetamask();
+  const disconnect = useDisconnect();
   // const connect = useConnect();
 
   const publishCampaign = async (form) => {
@@ -68,6 +67,7 @@ export const StateContextProvider = ({ children }) => {
     return parsedCampaings;
   };
 
+  //to get only owner created campaigns
   const getUserCampaigns = async () => {
     const allCampaigns = await getCampaigns();
 
@@ -108,6 +108,7 @@ export const StateContextProvider = ({ children }) => {
         address,
         contract,
         connect,
+        disconnect,
         createCampaign: publishCampaign,
         getCampaigns,
         getUserCampaigns,

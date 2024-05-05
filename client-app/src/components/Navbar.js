@@ -7,19 +7,20 @@ import { thirdweb } from "../assets";
 // const metamaskConfig = metamaskWallet();
 
 export function Navbar() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const address = "0xabc";
-  const { connect, address } = useStateContext();
+  const { disconnect, connect, address } = useStateContext();
 
   return (
     <div className="Navbar d-flex flex-row justify-content-end m-3">
       <div className="d-flex column-gap-4 align-items-center">
         <CustomButton
           btnType="button"
-          title={address ? "Create a campaign" : "Connect"}
+          title={address ? "Disconnect" : "Connect"}
           styles={address ? "bg-success" : "bg-danger"}
           handleClick={() => {
-            if (address) navigate("create-campaign");
+            if (address) disconnect();
+            // navigate("create-campaign");
             else connect();
           }}
         />

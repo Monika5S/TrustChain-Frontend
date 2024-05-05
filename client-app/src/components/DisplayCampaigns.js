@@ -11,14 +11,14 @@ export function DisplayCampaigns({ title, isLoading, campaigns }) {
   }
 
   return (
-    <div>
-      <h1 className="text-white">
+    <div className="px-4">
+      <h1 className="text-white text-center">
         {title} ({campaigns.length})
       </h1>
 
-      <div className="flex flex-wrap mt-4 column-gap-4 text-white">
+      <div className="d-flex mt-4 column-gap-4 text-white justify-content-around align-items-start">
         {isLoading ? (
-          <img src={loader} alt="loader" className="w-50 h-50" />
+          <img src={loader} alt="loader" className="w-25 h-25" />
         ) : (
           ""
         )}
