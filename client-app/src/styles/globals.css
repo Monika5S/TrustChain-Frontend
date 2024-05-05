@@ -17,8 +17,9 @@ a {
 }
 
 body {
-  color: #e7e8e8;
+  /* color: #e7e8e8; */
   background: #070707;
+  /* background: linear-gradient(#8562d1, #63299ded); */
 
-  /* background: linear-gradient(rgb(214, 216, 255), rgb(153, 146, 255)); */
+  /* background: linear-gradient(rgb(48, 49, 63), rgb(153, 146, 255)); */
 }

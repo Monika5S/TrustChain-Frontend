@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { DisplayCampaigns } from "../components";
 import { useStateContext } from "../context";
+import { useLocation } from "react-router-dom";
 
 export function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
 
   const { address, contract, getCampaigns } = useStateContext();
+  const { state } = useLocation();
+  console.log(state);
 
   async function fetchCampaigns() {
     setIsLoading(true);
@@ -25,6 +28,7 @@ export function Home() {
       title="All Campaigns"
       isLoading={isLoading}
       campaigns={campaigns}
+      product={state}
     />
   );
 }

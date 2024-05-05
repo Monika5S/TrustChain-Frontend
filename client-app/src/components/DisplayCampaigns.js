@@ -2,21 +2,25 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CampaignCard } from "./CampaignCard";
 import { loader } from "../assets";
+import { providers } from "ethers";
 
-export function DisplayCampaigns({ title, isLoading, campaigns }) {
+export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
   const navigate = useNavigate();
 
   function handleNavigate(campaign) {
-    navigate(`/campaign-details/${campaign.title}`, { state: campaign });
+    // console.log( product);
+    navigate(`/campaign-details/${campaign.title}`, {
+      state: { ...product, campaign },
+    });
   }
-
+  // console.log(product);
   return (
     <div className="px-4">
       <h1 className="text-white text-center">
         {title} ({campaigns.length})
       </h1>
 
-      <div className="d-flex mt-4 column-gap-4 text-white justify-content-around align-items-start">
+      <div className="w-100 d-flex mt-4 column-gap-4 text-white justify-content-around align-items-start">
         {isLoading ? (
           <img src={loader} alt="loader" className="w-25 h-25" />
         ) : (
@@ -38,6 +42,13 @@ export function DisplayCampaigns({ title, isLoading, campaigns }) {
               />
             ))
           : "No data available!"}
+        {0 === 1 ? (
+          <div>
+            {product.price}, {product.img_url}, {product.name}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

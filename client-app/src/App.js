@@ -7,6 +7,7 @@ import {
   CreateCampaigns,
   CampaignDetails,
   CooperativeStore,
+  ProductDetails,
 } from "./pages";
 import { Navbar, Sidebar } from "./components";
 
@@ -24,6 +25,7 @@ export default function App() {
 
     //   </div>
     // </main>
+    //login form will select which kind of user it is and passing down sidebar para accordingly!
     <div className="App d-flex">
       <div className="d-sm-flex">
         <Sidebar />
@@ -37,6 +39,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/cooperative-store" element={<CooperativeStore />} />
+            <Route path="/cooperative-store/:id" element={<ProductDetails />} />
 
             <Route path="/create-campaign" element={<CreateCampaigns />} />
             <Route path="/campaign-details/:id" element={<CampaignDetails />} />

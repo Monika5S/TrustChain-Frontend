@@ -18,7 +18,7 @@ export function FormField({
           onChange={handleChange}
           rows={10}
           placeholder={placeholder}
-          className="p-1 mb-3 border border-1 bg-transparent rounded"
+          className="p-1 mb-3 border border-1 bg-transparent rounded text-white"
         />
       ) : (
         <input

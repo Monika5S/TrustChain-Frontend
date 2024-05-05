@@ -3,13 +3,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 
 import { useStateContext } from "../context";
-import { CountBox, CustomButton, Loader } from "../components";
+import { CountBox, CustomButton } from "../components";
 import { calculateBarPercentage, daysLeft } from "../utils";
 import { thirdweb } from "../assets";
 
 export function CampaignDetails() {
-  const { state } = useLocation();
+  const location = useLocation();
+  const { product, campaign } = location.state || {};
   const navigate = useNavigate();
+  // console.log(product, campaign);
 
   const { donate, getDonations, contract, address } = useStateContext();
 
@@ -17,10 +19,10 @@ export function CampaignDetails() {
   const [amount, setAmount] = useState("");
   const [donators, setDonators] = useState([]);
 
-  const remainingDays = daysLeft(state.deadline);
+  const remainingDays = daysLeft(campaign.deadline);
 
   const fetchDonators = async () => {
-    const data = await getDonations(state.pId);
+    const data = await getDonations(campaign.pId);
 
     setDonators(data);
   };
@@ -32,20 +34,20 @@ export function CampaignDetails() {
   const handleDonate = async () => {
     setIsLoading(true);
 
-    await donate(state.pId, amount);
+    await donate(campaign.pId, product.price, amount);
 
     navigate("/");
     setIsLoading(false);
   };
 
   return (
-    <div className="px-5 py-3 my-3 mx-5 border border-3 rounded-5">
+    <div className="px-5 py-3 my-3 mx-5 w-75 border border-3 rounded-5 text-white">
       {isLoading && "Loading"}
 
       <div className="w-100 p-5 d-flex justify-content-around align-items-center mt-2">
         <div className="flex-1">
           <img
-            src={state.image}
+            src={campaign.image}
             alt="campaign"
             className="w-100 object-fit-cover rounded-5"
           />
@@ -66,8 +68,8 @@ export function CampaignDetails() {
         <div className="w-100 d-flex flex-column justify-content-center align-items-center">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox
-            title={`Raised of ${state.target}`}
-            value={state.amountCollected}
+            title={`Raised of ${campaign.target}`}
+            value={campaign.amountCollected}
           />
           <CountBox title="Total Donators" value={donators.length} />
         </div>
@@ -87,7 +89,7 @@ export function CampaignDetails() {
                 />
               </div>
               <div>
-                <h4 className="text-white">{state.owner}</h4>
+                <h4 className="text-white">{campaign.owner}</h4>
                 <p className="my-1">10 Campaigns</p>
               </div>
             </div>
@@ -97,7 +99,7 @@ export function CampaignDetails() {
             <h4 className="text-white text-uppercase">Story</h4>
 
             <div className="mt-1">
-              <p className="">{state.description}</p>
+              <p className="">{campaign.description}</p>
             </div>
           </div>
 
@@ -125,10 +127,21 @@ export function CampaignDetails() {
         </div>
 
         <div className="flex-1">
-          <h4 className="text-white">Fund</h4>
+          <h4 className="text-white">Pay using Metamask Wallet</h4>
+          <p className="text-left">
+            Trust the chain of chairty with cooperative store!
+          </p>
 
-          <div className="d-flex rounded-3">
-            <p className="text-left">Fund the campaign</p>
+          <div className="d-flex w-100 border  justify-content-around align-items-center p-3 rounded-3 column-gap-3">
+            {product ? (
+              <div className="w-25 h-25">
+                <img src={product.img} alt={product.name} className="w-100" />
+                <h4>{product.price}</h4>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
             <div className="mt-3">
               <input
                 type="number"
@@ -141,17 +154,17 @@ export function CampaignDetails() {
 
               <div className="rounded-3">
                 <h4 className="text-white">
-                  Back it because you believe in it.
+                  Back it because you believe in it!
                 </h4>
-                <p className="">
+                {/* <p className="">
                   Support the project for no reward, just because it speaks to
                   you.
-                </p>
+                </p> */}
               </div>
 
               <CustomButton
                 btnType="button"
-                title="Fund Campaign"
+                title="PAY"
                 styles="w-auto bg-primary"
                 handleClick={handleDonate}
               />

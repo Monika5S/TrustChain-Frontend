@@ -37,20 +37,54 @@ contract  CooperativeCharity{
         return numberOfCampaigns - 1;
     }
 
-    function donateToCampaign(uint256 _id) public payable {
-        uint256 amount = msg.value;
+    // function donateToCampaign(uint256 _id) public payable {
+    //     uint256 amount = msg.value;
+
+    //     Campaign storage campaign = campaigns[_id];
+
+    //     campaign.donators.push(msg.sender);
+    //     campaign.donations.push(amount);
+
+    //     (bool sent,) = {payable(campaign.owner).call{value: amount}("");}
+    //     // (bool sent,) = payable("").call{value: amount}("");}
+
+    //     if(sent) {
+    //         campaign.amountCollected = campaign.amountCollected + amount;
+    //     }
+    // }
+
+
+
+    function donateToCampaign(uint256 _id, uint256 price) public payable {
+        
+        require(msg.value >= price, "ETH sent is Insufficient!");
 
         Campaign storage campaign = campaigns[_id];
 
-        campaign.donators.push(msg.sender);
-        campaign.donations.push(amount);
+        // Calculating the amounts to send
+        uint256 campaignAmount = (price * 5) / 100; // 5% for the campaign owner
+        uint256 storeAmount = price - campaignAmount; // Remaining amount for store owner
 
-        (bool sent,) = payable(campaign.owner).call{value: amount}("");
-
-        if(sent) {
-            campaign.amountCollected = campaign.amountCollected + amount;
+        //to check if charity target is less than 5% of price
+        if (campaign.target < campaignAmount) {
+            // Add remaining to store amount
+            storeAmount += campaignAmount - campaign.target;
+            campaignAmount = campaign.target;
         }
+
+        // Transfer 5% to the campaign owner
+        payable(campaign.owner).transfer(campaignAmount);
+
+        // Update campaign details
+        campaign.amountCollected = campaign.amountCollected + campaignAmount;
+        campaign.donators.push(msg.sender);
+        campaign.donations.push(campaignAmount);
+
+        // Transfer remaining amount to store owner
+        payable(0x90F79bf6EB2c4f870365E785982E1f101E93b906).transfer(storeAmount);
     }
+
+
 
     function getDonators(uint256 _id) view public returns (address[] memory, uint256[] memory) {
         return (campaigns[_id].donators, campaigns[_id].donations);
