@@ -1,15 +1,20 @@
 import React, { useContext, createContext } from "react";
 import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-import { EditionMetadataWithOwnerOutputSchema } from "@thirdweb-dev/sdk";
+import {
+  CommonSymbolSchema,
+  EditionMetadataWithOwnerOutputSchema,
+} from "@thirdweb-dev/sdk";
 import { useMetamask, useDisconnect } from "@thirdweb-dev/react";
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0x663F3ad617193148711d28f5334eE4Ed07016602"
+    "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6"
   );
+  // "0x663F3ad617193148711d28f5334eE4Ed07016602"
+  // );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
     "createCampaign"
@@ -78,10 +83,15 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
-  const donate = async (pId, amount) => {
-    const data = await contract.call("donateToCampaign", [pId], {
-      value: ethers.utils.parseEther(amount),
-    });
+  const donate = async (pId, price, amount) => {
+    console.log(price);
+    const data = await contract.call(
+      "donateToCampaign",
+      [pId, ethers.utils.parseEther(price)],
+      {
+        value: ethers.utils.parseEther(amount),
+      }
+    );
 
     return data;
   };
