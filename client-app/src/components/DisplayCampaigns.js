@@ -15,7 +15,7 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
   }
   // console.log(product);
   return (
-    <div className="px-4">
+    <div className="px-4 w-100">
       <h1 className="text-white text-center">
         {title} ({campaigns.length})
       </h1>
