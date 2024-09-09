@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 export function DisplayProduct({ products }) {
   const navigate = useNavigate();
   function handleNavigate(product) {
-    navigate(`/cooperative-store/${product.name}`, { state: product });
+    navigate(`/store-dashboard/cooperative-store/${product.name}`, {
+      state: product,
+    });
   }
 
   return (

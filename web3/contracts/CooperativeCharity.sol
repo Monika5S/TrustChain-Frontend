@@ -53,8 +53,6 @@ contract  CooperativeCharity{
     //     }
     // }
 
-
-
     function donateToCampaign(uint256 _id, uint256 price) public payable {
         
         require(msg.value >= price, "ETH sent is Insufficient!");

@@ -3,7 +3,7 @@ import { DisplayCampaigns } from "../components";
 import { useStateContext } from "../context";
 import { useLocation } from "react-router-dom";
 
-export function Home() {
+export function AllCampaigns() {
   const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
 

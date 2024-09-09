@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { DisplayCampaigns } from "../components";
-import { useStateContext } from "../context";
+import { DisplayCampaigns } from "../../components";
+import { useStateContext } from "../../context";
 
-export function Profile() {
+export function CharityCampaigns() {
   const [isLoading, setIsLoading] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
 
@@ -22,11 +22,12 @@ export function Profile() {
 
   return (
     <div className="w-100">
-      <DisplayCampaigns
+      <h1>all user campaigns</h1>
+      {/* <DisplayCampaigns
         title="All Campaigns"
         isLoading={isLoading}
         campaigns={campaigns}
-      />
+      /> */}
     </div>
   );
 }

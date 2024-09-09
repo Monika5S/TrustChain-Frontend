@@ -23,3 +23,11 @@ body {
 
   /* background: linear-gradient(rgb(48, 49, 63), rgb(153, 146, 255)); */
 }
+
+.dark-mode body {
+  background: #070707;
+}
+
+.light-mode body {
+  background: #e8ebff;
+}

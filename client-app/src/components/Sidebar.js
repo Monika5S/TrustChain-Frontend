@@ -15,10 +15,17 @@ const Icon = ({ styles, isActive, name, imgUrl, handleClick, disabled }) => (
   </div>
 );
 
-export function Sidebar({ user, org, store }) {
+export function Sidebar(props) {
+  var navlinks_user;
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
-
+  if (props.user === "customer") {
+    navlinks_user = navlinks.customer;
+  } else if (props.user === "store") {
+    navlinks_user = navlinks.store;
+  } else {
+    navlinks_user = navlinks.charityOrg;
+  }
   return (
     <div className="Sidebar d-flex flex-column ">
       <Link to="/">
@@ -26,22 +33,16 @@ export function Sidebar({ user, org, store }) {
       </Link>
 
       <div className="nav-links d-flex flex-column justify-content-between align-items-center bg-transparent rounded p-1 m-2 ">
-        {navlinks.map((link) => (
+        {navlinks_user.map((link) => (
           <Icon
             key={link.name} //for mapping
             {...link}
             isActive={isActive}
             handleClick={() => {
-              if (user && link.name === "campaign") {
-                link.disabled = true;
-              }
-              if (org && link.name === "store") {
-                link.disabled = true;
-              }
-              if (!link.disabled) {
-                setIsActive(link.name);
-                navigate(link.link);
-              }
+              // if (!link.disabled) {
+              setIsActive(link.name);
+              navigate(link.link);
+              // }
             }}
           />
         ))}

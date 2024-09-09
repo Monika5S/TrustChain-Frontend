@@ -2,13 +2,23 @@
 import "./styles/Home.css";
 import { Route, Routes } from "react-router-dom";
 import {
-  Home,
+  AllCampaigns,
   Profile,
   CreateCampaigns,
   CampaignDetails,
+  CharityCampaigns,
+  CharityCampaignDetails,
   CooperativeStore,
   ProductDetails,
 } from "./pages";
+import HomeAbout from "./pages/HomeAbout";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import VerifyOtp from "./pages/VerifyOtp";
+import StoreDashboard from "./pages/store/StoreDashboard";
+import CharityDashboard from "./pages/charityorg/CharityDashboard";
+import UserDashboard from "./pages/user/UserDashboard";
+
 import { Navbar, Sidebar } from "./components";
 
 export default function App() {
@@ -27,24 +37,49 @@ export default function App() {
     // </main>
     //login form will select which kind of user it is and passing down sidebar para accordingly!
     <div className="App d-flex">
-      <div className="d-sm-flex">
+      {/* <div className="d-sm-flex">
         <Sidebar />
-      </div>
+      </div> */}
 
       <div className="d-flex flex-column w-100">
-        <Navbar />
+        {/* <Navbar /> */}
 
-        <div className="d-flex justify-content-center align-items-center my-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/cooperative-store" element={<CooperativeStore />} />
-            <Route path="/cooperative-store/:id" element={<ProductDetails />} />
+        {/* <div className="d-flex justify-content-center align-items-center my-4"> */}
+        <Routes>
+          <Route path="/" element={<HomeAbout />} />
+          <Route path="/all-campaigns" element={<AllCampaigns />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/login" element={<Login />} />
 
-            <Route path="/create-campaign" element={<CreateCampaigns />} />
-            <Route path="/campaign-details/:id" element={<CampaignDetails />} />
-          </Routes>
-        </div>
+          <Route path="/store-dashboard" element={<StoreDashboard />}>
+            <Route index element={<CooperativeStore />} />
+            <Route path="cooperative-store" element={<CooperativeStore />} />
+            <Route path="cooperative-store/:id" element={<ProductDetails />} />
+            {/* <Route path="profile" element={<Profile />} /> */}
+          </Route>
+
+          <Route path="/charity-dashboard" element={<CharityDashboard />}>
+            <Route index element={<CharityCampaigns />} />
+            <Route path="charity-campaigns" element={<CharityCampaigns />} />
+            <Route path="create-campaign" element={<CreateCampaigns />} />
+            <Route
+              path="charity-campaign-details/:id"
+              element={<CharityCampaignDetails />}
+            />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+
+          <Route path="/user-dashboard" element={<UserDashboard />} />
+          {/* <Route path="dashboard" element={<Home />} />
+            <Route path="create-campaign" element={<CreateCampaigns />} />
+          </Route> */}
+
+          {/* <Route path="/profile" element={<Profile />} /> */}
+
+          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+        </Routes>
+        {/* </div> */}
       </div>
     </div>
   );
