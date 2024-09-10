@@ -10,6 +10,8 @@ import {
   CharityCampaignDetails,
   CooperativeStore,
   ProductDetails,
+  StoreProfile,
+  AllStoreProducts,
 } from "./pages";
 import HomeAbout from "./pages/HomeAbout";
 import SignUp from "./pages/SignUp";
@@ -53,10 +55,10 @@ export default function App() {
           <Route path="/login" element={<Login />} />
 
           <Route path="/store-dashboard" element={<StoreDashboard />}>
-            <Route index element={<CooperativeStore />} />
+            <Route index element={<StoreProfile />} />
             <Route path="cooperative-store" element={<CooperativeStore />} />
             <Route path="cooperative-store/:id" element={<ProductDetails />} />
-            {/* <Route path="profile" element={<Profile />} /> */}
+            <Route path="store-profile" element={<StoreProfile />} />
           </Route>
 
           <Route path="/charity-dashboard" element={<CharityDashboard />}>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { signOut } from "firebase/auth"; // Import signOut from Firebase
+import { auth } from "../firebase"; // Ensure you import your auth instance
 import { logo, sun } from "../assets";
 import { navlinks } from "../constants";
 
@@ -16,9 +17,11 @@ const Icon = ({ styles, isActive, name, imgUrl, handleClick, disabled }) => (
 );
 
 export function Sidebar(props) {
-  var navlinks_user;
   const navigate = useNavigate();
   const [isActive, setIsActive] = useState("dashboard");
+  var navlinks_user;
+
+  // Define navlinks based on the user role
   if (props.user === "customer") {
     navlinks_user = navlinks.customer;
   } else if (props.user === "store") {
@@ -26,28 +29,46 @@ export function Sidebar(props) {
   } else {
     navlinks_user = navlinks.charityOrg;
   }
+
+  // Handle Logout Function
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Sign out the user
+      navigate("/"); // Redirect to the home page
+    } catch (error) {
+      console.error("Logout Error:", error); // Handle any errors during logout
+    }
+  };
+
   return (
-    <div className="Sidebar d-flex flex-column ">
+    <div className="Sidebar d-flex flex-column">
       <Link to="/">
         <Icon styles="bg-dark p-3" imgUrl={logo} />
       </Link>
 
-      <div className="nav-links d-flex flex-column justify-content-between align-items-center bg-transparent rounded p-1 m-2 ">
+      <div className="nav-links d-flex flex-column justify-content-between align-items-center bg-transparent rounded p-1 m-2">
         {navlinks_user.map((link) => (
           <Icon
-            key={link.name} //for mapping
+            key={link.name}
             {...link}
             isActive={isActive}
             handleClick={() => {
-              // if (!link.disabled) {
               setIsActive(link.name);
               navigate(link.link);
-              // }
             }}
           />
         ))}
 
+        {/* Theme toggle button */}
         <Icon styles="mt-5 bg-dark shadow-secondary" imgUrl={sun} />
+
+        {/* Logout Button */}
+        <button
+          className="logout-button btn btn-danger mt-4 p-2 rounded"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>
       </div>
     </div>
   );

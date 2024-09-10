@@ -29,7 +29,14 @@ function Login() {
 
       if (docSnap.exists()) {
         const userData = docSnap.data();
+        const userWithDetails = {
+          uid: user.uid,
+          email: user.email,
+          ...userData,
+        };
 
+        console.log("Navigating with user data:", userWithDetails);
+        localStorage.setItem("user", JSON.stringify(userWithDetails));
         // Redirect based on user role
         if (userData.category === "charity-org") {
           navigate("/charity-dashboard");

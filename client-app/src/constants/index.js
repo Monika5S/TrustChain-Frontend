@@ -50,13 +50,13 @@ export const navlinks = {
   store: [
     {
       name: "store",
-      imgUrl: payment,
+      imgUrl: dashboard,
       link: "/store-dashboard/cooperative-store",
     },
     {
       name: "profile",
       imgUrl: profile,
-      link: "/store-dashboard/profile",
+      link: "/store-dashboard/store-profile",
     },
   ],
   charityOrg: [

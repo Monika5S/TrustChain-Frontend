@@ -5,3 +5,4 @@ export { FormField } from "./FormField";
 export { DisplayCampaigns } from "./DisplayCampaigns";
 export { DisplayProduct } from "./DisplayProduct";
 export { CountBox } from "./CountBox";
+export { ProfileForm } from "./ProfileForm";
