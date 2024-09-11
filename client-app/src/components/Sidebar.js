@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth"; // Import signOut from Firebase
 import { auth } from "../firebase"; // Ensure you import your auth instance
-import { logo, sun } from "../assets";
+import { logo, logout, sun } from "../assets";
 import { navlinks } from "../constants";
 
 const Icon = ({ styles, isActive, name, imgUrl, handleClick, disabled }) => (
@@ -46,7 +46,7 @@ export function Sidebar(props) {
         <Icon styles="bg-dark p-3" imgUrl={logo} />
       </Link>
 
-      <div className="nav-links d-flex flex-column justify-content-between align-items-center bg-transparent rounded p-1 m-2">
+      <div className="nav-links d-flex flex-column justify-content-between align-items-center bg-transparent rounded p-1 m-2 ">
         {navlinks_user.map((link) => (
           <Icon
             key={link.name}
@@ -60,14 +60,21 @@ export function Sidebar(props) {
         ))}
 
         {/* Theme toggle button */}
-        <Icon styles="mt-5 bg-dark shadow-secondary" imgUrl={sun} />
+        {/* <Icon styles="mt-5 bg-dark shadow-secondary" imgUrl={sun} /> */}
 
         {/* Logout Button */}
+        {/* <Icon
+          styles="mt-5"
+          // className="logout-button btn btn-danger mt-4 p-2 rounded"
+          imgUrl={logout}
+          onClick={handleLogout}
+        /> */}
+
         <button
-          className="logout-button btn btn-danger mt-4 p-2 rounded"
+          className="logout-button btn btn-primary mt-4 p-2 rounded"
           onClick={handleLogout}
         >
-          Logout
+          <img src={logout} alt="Logout" className="me-2" />
         </button>
       </div>
     </div>

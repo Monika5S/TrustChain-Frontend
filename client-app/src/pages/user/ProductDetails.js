@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CustomButton } from "../components";
+import { CustomButton } from "../../components";
 
 export function ProductDetails() {
   const { state } = useLocation();
@@ -14,7 +14,7 @@ export function ProductDetails() {
       desc: state.desc,
     };
 
-    navigate("/", { state: { product } });
+    navigate("/user-dashboard/campaigns", { state: { product } });
   }
 
   return (

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 
-import { useStateContext } from "../context";
-import { CountBox, CustomButton } from "../components";
-import { calculateBarPercentage, daysLeft } from "../utils";
-import { thirdweb } from "../assets";
+import { useStateContext } from "../../context";
+import { CountBox, CustomButton } from "../../components";
+import { calculateBarPercentage, daysLeft } from "../../utils";
+import { thirdweb } from "../../assets";
 
 export function CampaignDetails() {
   const location = useLocation();

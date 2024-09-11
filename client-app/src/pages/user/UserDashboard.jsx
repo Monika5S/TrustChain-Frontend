@@ -15,8 +15,7 @@ function UserDashboard() {
         <Navbar />
 
         <div className="d-flex justify-content-center align-items-center my-4">
-          <div>User Dashboard</div>
-          {/* <Outlet /> */}
+          <Outlet />
         </div>
       </div>
     </div>

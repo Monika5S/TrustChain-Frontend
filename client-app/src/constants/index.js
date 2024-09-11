@@ -12,18 +12,14 @@ export const navlinks = {
     {
       name: "dashboard",
       imgUrl: dashboard,
-      link: "/all-campaigns",
+      link: "/user-dashboard/products",
     },
     {
       name: "campaign",
       imgUrl: createCampaign,
-      link: "/create-campaign",
+      link: "/user-dashboard/campaigns",
     },
-    // {
-    //   name: "dashboard",
-    //   imgUrl: dashboard,
-    //   link: "/all-campaigns",
-    // },
+
     // {
     //   name: "store",
     //   imgUrl: payment,
@@ -38,7 +34,7 @@ export const navlinks = {
     {
       name: "profile",
       imgUrl: profile,
-      link: "/profile",
+      link: "/user-dashboard/profile",
     },
     // {
     //   name: "logout",

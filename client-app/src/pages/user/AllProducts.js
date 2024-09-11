@@ -1,8 +1,8 @@
 // AllStoreProducts.js
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { DisplayProduct } from "../components";
+import { DisplayProduct } from "../../components";
 
 export function AllProducts() {
   const [products, setProducts] = useState([]);

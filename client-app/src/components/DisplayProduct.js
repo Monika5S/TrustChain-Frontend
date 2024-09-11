@@ -10,7 +10,7 @@ export function DisplayProduct({ products, store }) {
         state: product,
       });
     } else {
-      navigate(`/allproducts/${product.name}`, {
+      navigate(`/user-dashboard/products/${product.name}`, {
         state: product,
       });
     }

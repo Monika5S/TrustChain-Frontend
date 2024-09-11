@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { DisplayCampaigns } from "../components";
-import { useStateContext } from "../context";
+import { DisplayCampaigns } from "../../components";
+import { useStateContext } from "../../context";
 import { useLocation } from "react-router-dom";
 
 export function AllCampaigns() {

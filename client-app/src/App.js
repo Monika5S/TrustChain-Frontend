@@ -3,13 +3,14 @@ import "./styles/Home.css";
 import { Route, Routes } from "react-router-dom";
 import {
   AllCampaigns,
-  Profile,
-  CreateCampaigns,
   CampaignDetails,
-  CharityCampaigns,
-  CharityCampaignDetails,
   AllProducts,
   ProductDetails,
+  UserProfile,
+  CreateCampaigns,
+  CharityCampaigns,
+  CharityCampaignDetails,
+  Profile,
   StoreProfile,
   StoreOwnerProducts,
   StoreProductDetails,
@@ -23,7 +24,7 @@ import StoreDashboard from "./pages/store/StoreDashboard";
 import CharityDashboard from "./pages/charityorg/CharityDashboard";
 import UserDashboard from "./pages/user/UserDashboard";
 
-import { Navbar, Sidebar } from "./components";
+// import { Navbar, Sidebar } from "./components";
 
 export default function App() {
   return (
@@ -51,7 +52,7 @@ export default function App() {
         {/* <div className="d-flex justify-content-center align-items-center my-4"> */}
         <Routes>
           <Route path="/" element={<HomeAbout />} />
-          <Route path="/all-campaigns" element={<AllCampaigns />} />
+          {/* <Route path="/all-campaigns" element={<AllCampaigns />} /> */}
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/verify-otp" element={<VerifyOtp />} />
           <Route path="/login" element={<Login />} />
@@ -69,22 +70,20 @@ export default function App() {
             <Route path="charity-campaigns" element={<CharityCampaigns />} />
             <Route path="create-campaign" element={<CreateCampaigns />} />
             <Route
-              path="charity-campaign-details/:id"
+              path="charity-campaign/:id"
               element={<CharityCampaignDetails />}
             />
             <Route path="profile" element={<Profile />} />
           </Route>
 
-          <Route path="/user-dashboard" element={<UserDashboard />} />
-          {/* <Route path="dashboard" element={<Home />} />
-            <Route path="create-campaign" element={<CreateCampaigns />} />
-          </Route> */}
-
-          {/* <Route path="/profile" element={<Profile />} /> */}
-          <Route path="allproducts" element={<AllProducts />} />
-          <Route path="allproducts/:id" element={<ProductDetails />} />
-
-          <Route path="/campaign-details/:id" element={<CampaignDetails />} />
+          <Route path="/user-dashboard" element={<UserDashboard />}>
+            <Route index element={<AllProducts />} />
+            <Route path="products" element={<AllProducts />} />
+            <Route path="campaigns" element={<AllCampaigns />} />
+            <Route path="campaigns/:id" element={<CampaignDetails />} />
+            <Route path="products/:id" element={<ProductDetails />} />
+            <Route path="profile" element={<UserProfile />} />
+          </Route>
         </Routes>
         {/* </div> */}
       </div>
