@@ -1,25 +1,34 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-//passing state of product to campaign page to support 5% of price to them
-export function DisplayProduct({ products }) {
+export function DisplayProduct({ products, store }) {
   const navigate = useNavigate();
-  function handleNavigate(product) {
-    navigate(`/store-dashboard/cooperative-store/${product.name}`, {
-      state: product,
-    });
+
+  const handleNavigate = (product) => {
+    if (store) {
+      navigate(`/store-dashboard/products/${product.name}`, {
+        state: product,
+      });
+    } else {
+      navigate(`/allproducts/${product.name}`, {
+        state: product,
+      });
+    }
+  };
+
+  if (!products || products.length === 0) {
+    return <p>No products available.</p>;
   }
 
   return (
-    <div className="d-flex justify-content-around w-100 column-gap-3">
-      {products.map((product, index) => (
+    <div className="d-flex flex-wrap justify-content-around w-100 column-gap-3">
+      {products.map((product) => (
         <div
-          className="w-25 border border-2 rounded"
-          key={index}
+          className="w-25 border border-2 rounded mb-3"
+          key={product.id} // Use product.id for a unique key
           onClick={() => handleNavigate(product)}
+          style={{ cursor: "pointer" }} // Add cursor pointer for better UX
         >
-          {/* condition to check If img_url is provided then render the image */}
-
           {product.img_url && (
             <img
               src={product.img_url}
@@ -28,14 +37,13 @@ export function DisplayProduct({ products }) {
               className="rounded w-100"
             />
           )}
-
           <div className="p-2 text-white bg-transparent">
             <h3>{product.name}</h3>
             <p>{product.desc}</p>
             <div className="d-flex align-items-center justify-content-between column-gap-3">
               <h6>Price: {product.price} ETH</h6>
               <h6>Status: {product.status}</h6>
-              {!product.status ? product.more : ""}
+              {product.status === "available" && <p>{product.more}</p>}
             </div>
           </div>
         </div>

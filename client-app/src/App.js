@@ -8,10 +8,12 @@ import {
   CampaignDetails,
   CharityCampaigns,
   CharityCampaignDetails,
-  CooperativeStore,
+  AllProducts,
   ProductDetails,
   StoreProfile,
-  AllStoreProducts,
+  StoreOwnerProducts,
+  StoreProductDetails,
+  CreateProduct,
 } from "./pages";
 import HomeAbout from "./pages/HomeAbout";
 import SignUp from "./pages/SignUp";
@@ -56,8 +58,9 @@ export default function App() {
 
           <Route path="/store-dashboard" element={<StoreDashboard />}>
             <Route index element={<StoreProfile />} />
-            <Route path="cooperative-store" element={<CooperativeStore />} />
-            <Route path="cooperative-store/:id" element={<ProductDetails />} />
+            <Route path="products" element={<StoreOwnerProducts />} />
+            <Route path="products/:id" element={<StoreProductDetails />} />
+            <Route path="create-product" element={<CreateProduct />} />
             <Route path="store-profile" element={<StoreProfile />} />
           </Route>
 
@@ -78,6 +81,8 @@ export default function App() {
           </Route> */}
 
           {/* <Route path="/profile" element={<Profile />} /> */}
+          <Route path="allproducts" element={<AllProducts />} />
+          <Route path="allproducts/:id" element={<ProductDetails />} />
 
           <Route path="/campaign-details/:id" element={<CampaignDetails />} />
         </Routes>

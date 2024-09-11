@@ -51,7 +51,12 @@ export const navlinks = {
     {
       name: "store",
       imgUrl: dashboard,
-      link: "/store-dashboard/cooperative-store",
+      link: "/store-dashboard/products",
+    },
+    {
+      name: "product",
+      imgUrl: createCampaign,
+      link: "/store-dashboard/create-product",
     },
     {
       name: "profile",
