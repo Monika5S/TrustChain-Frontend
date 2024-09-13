@@ -11,9 +11,12 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6"
+    "0x663f3ad617193148711d28f5334ee4ed07016602"
   );
-  // "0x663F3ad617193148711d28f5334eE4Ed07016602"
+  //
+  // "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6" ->when user2 deploy
+  // "0x663F3ad617193148711d28f5334eE4Ed07016602" ->when user1 deploy
+
   // );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,

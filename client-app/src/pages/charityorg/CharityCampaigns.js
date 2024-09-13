@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DisplayCampaigns } from "../../components";
+import { DisplayCharityCampaigns } from "../../components";
 import { useStateContext } from "../../context";
 
 export function CharityCampaigns() {
@@ -23,11 +23,11 @@ export function CharityCampaigns() {
   return (
     <div className="w-100">
       <h1>all user campaigns</h1>
-      {/* <DisplayCampaigns
+      <DisplayCharityCampaigns
         title="All Campaigns"
         isLoading={isLoading}
         campaigns={campaigns}
-      /> */}
+      />
     </div>
   );
 }

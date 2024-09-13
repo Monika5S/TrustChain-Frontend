@@ -70,7 +70,7 @@ export default function App() {
             <Route path="charity-campaigns" element={<CharityCampaigns />} />
             <Route path="create-campaign" element={<CreateCampaigns />} />
             <Route
-              path="charity-campaign/:id"
+              path="charity-campaigns/:id"
               element={<CharityCampaignDetails />}
             />
             <Route path="profile" element={<Profile />} />
@@ -85,6 +85,7 @@ export default function App() {
             <Route path="profile" element={<UserProfile />} />
           </Route>
         </Routes>
+
         {/* </div> */}
       </div>
     </div>

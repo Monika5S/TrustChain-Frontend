@@ -2,18 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CampaignCard } from "./CampaignCard";
 import { loader } from "../assets";
-import { providers } from "ethers";
 
-export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
+export function DisplayCharityCampaigns({ title, isLoading, campaigns }) {
   const navigate = useNavigate();
 
   function handleNavigate(campaign) {
-    // console.log( product);
-    navigate(`/user-dashboard/campaigns/${campaign.title}`, {
-      state: { ...product, campaign },
+    navigate(`/charity-dashboard/charity-campaigns/${campaign.title}`, {
+      state: { campaign },
     });
   }
-  // console.log(product);
+
   return (
     <div className="px-4 w-100">
       <h1 className="text-white text-center">
@@ -42,13 +40,6 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
               />
             ))
           : "No data available!"}
-        {0 === 1 ? (
-          <div>
-            {product.price}, {product.img_url}, {product.name}
-          </div>
-        ) : (
-          ""
-        )}
       </div>
     </div>
   );
