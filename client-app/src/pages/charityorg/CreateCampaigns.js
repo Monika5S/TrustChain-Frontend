@@ -17,7 +17,7 @@ export function CreateCampaigns() {
     targetGoal: "",
     deadline: "",
     image: "",
-    support_keyword: "education",
+    support_keyword: "all",
     //documents etc.
   });
 
@@ -28,7 +28,6 @@ export function CreateCampaigns() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("heello", form.targetGoal);
     checkIfImage(form.image, async (exists) => {
       if (exists) {
         setIsLoading(true); //while campaign been creating!
@@ -115,6 +114,14 @@ export function CreateCampaigns() {
           inputType="url"
           value={form.image}
           handleChange={(e) => handleFormFieldChange("image", e)}
+        />
+
+        <FormField
+          labelName="Supported Cause *"
+          placeholder="Mention the cause campign supports (education, healthcare etc.)"
+          inputType="text"
+          value={form.title}
+          handleChange={(e) => handleFormFieldChange("support_keyword", e)}
         />
 
         <div className="d-flex justify-content-center align-items-center mt-4">

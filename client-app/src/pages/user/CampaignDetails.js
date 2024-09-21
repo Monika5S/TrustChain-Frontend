@@ -15,7 +15,6 @@ export function CampaignDetails() {
   const { product, campaign } = location.state || {};
   const navigate = useNavigate();
   // console.log(product, campaign);
-  const donate_percentage = 1;
   const { donate, getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +38,7 @@ export function CampaignDetails() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const userId = storedUser?.uid;
     try {
+      const donate_percentage = product.donate_percentage;
       const donate_amount = amount * (donate_percentage / 100);
       const paymentData = {
         userID: userId,

@@ -1,4 +1,3 @@
-// import { ConnectWallet } from "@thirdweb-dev/react";
 import "./styles/Home.css";
 import { Route, Routes } from "react-router-dom";
 import {
@@ -24,35 +23,14 @@ import VerifyOtp from "./pages/VerifyOtp";
 import StoreDashboard from "./pages/store/StoreDashboard";
 import CharityDashboard from "./pages/charityorg/CharityDashboard";
 import UserDashboard from "./pages/user/UserDashboard";
-// import { Navbar, Sidebar } from "./components";
 
 export default function App() {
   return (
-    // <main className="main">
-    //   <div className="container">
-    //     <div className="header">
-    //       <h1 className="title">Welcome to Trustchain</h1>
-
-    //       {/* <div className="connect">
-    //         <ConnectWallet />
-    //       </div> */}
-    //     </div>
-
-    //   </div>
-    // </main>
-    //login form will select which kind of user it is and passing down sidebar para accordingly!
     <div className="App d-flex">
-      {/* <div className="d-sm-flex">
-        <Sidebar />
-      </div> */}
-
       <div className="d-flex flex-column w-100">
-        {/* <Navbar /> */}
-
         {/* <div className="d-flex justify-content-center align-items-center my-4"> */}
         <Routes>
           <Route path="/" element={<HomeAbout />} />
-          {/* <Route path="/all-campaigns" element={<AllCampaigns />} /> */}
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/verify-otp" element={<VerifyOtp />} />
           <Route path="/login" element={<Login />} />
@@ -86,8 +64,6 @@ export default function App() {
             <Route path="payments" element={<PaymentHistory />} />
           </Route>
         </Routes>
-
-        {/* </div> */}
       </div>
     </div>
   );

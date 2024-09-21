@@ -14,10 +14,12 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
     });
   }
 
-  // const filteredCampaigns = campaigns.filter(
-  //   (campaign) => campaign.support_keyword === product.support_cause
-  // );
-  const filteredCampaigns = campaigns;
+  var filteredCampaigns = campaigns;
+  if (product.support_keyword !== "all") {
+    filteredCampaigns = campaigns.filter(
+      (campaign) => campaign.support_keyword === product.support_cause
+    );
+  }
 
   // console.log(product);
   return (
