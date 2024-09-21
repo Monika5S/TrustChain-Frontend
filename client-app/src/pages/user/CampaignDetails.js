@@ -7,12 +7,15 @@ import { CountBox, CustomButton } from "../../components";
 import { calculateBarPercentage, daysLeft } from "../../utils";
 import { thirdweb } from "../../assets";
 
+import { db } from "../../firebase"; // Ensure correct path to firebase config
+import { collection, addDoc, getDoc, doc } from "firebase/firestore";
+
 export function CampaignDetails() {
   const location = useLocation();
   const { product, campaign } = location.state || {};
   const navigate = useNavigate();
   // console.log(product, campaign);
-
+  const donate_percentage = 1;
   const { donate, getDonations, contract, address } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -33,10 +36,36 @@ export function CampaignDetails() {
 
   const handleDonate = async () => {
     setIsLoading(true);
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const userId = storedUser?.uid;
+    try {
+      const donate_amount = amount * (donate_percentage / 100);
+      const paymentData = {
+        userID: userId,
+        userWallet: address, // User's wallet address
+        productName: product.name,
+        productPrice: product.price,
+        storeWallet: campaign.owner,
+        campaignTitle: campaign.title,
+        campaignId: campaign.pId,
+        PaidAmount: amount,
+        donatedAmount: donate_amount,
+        timestamp: new Date(),
+      };
+      console.log(paymentData);
 
-    await donate(campaign.pId, product.price, amount);
+      await addDoc(collection(db, "payments"), paymentData);
 
-    navigate("/");
+      await donate(campaign.pId, product.price, amount, donate_percentage);
+
+      navigate("/user-dashboard/payments");
+    } catch (error) {
+      console.error("Error processing donation or storing payment:", error);
+    }
+
+    // await donate(campaign.pId, product.price, amount, donate_percentage);
+
+    // navigate("/");
     setIsLoading(false);
   };
 
@@ -65,10 +94,10 @@ export function CampaignDetails() {
           </div> */}
         </div>
 
-        <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+        <div className="w-100 d-flex flex-row justify-content-center align-items-center">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox
-            title={`Raised of ${campaign.target}`}
+            title={`Raised of ${campaign.targetGoal}`}
             value={campaign.amountCollected}
           />
           <CountBox title="Total Donators" value={donators.length} />
@@ -90,13 +119,13 @@ export function CampaignDetails() {
               </div>
               <div>
                 <h4 className="text-white">{campaign.owner}</h4>
-                <p className="my-1">10 Campaigns</p>
+                <p className="my-1">Owner Campaign</p>
               </div>
             </div>
           </div>
 
           <div>
-            <h4 className="text-white text-uppercase">Story</h4>
+            <h4 className="text-white text-uppercase">Description</h4>
 
             <div className="mt-1">
               <p className="">{campaign.description}</p>
@@ -120,23 +149,25 @@ export function CampaignDetails() {
                   </div>
                 ))
               ) : (
-                <p className="">No donators yet. Be the first one!</p>
+                <p className="">Be the first to join the cause!</p>
               )}
             </div>
           </div>
         </div>
 
         <div className="flex-1">
-          <h4 className="text-white">Pay using Metamask Wallet</h4>
+          <h5 className="text-white">Pay using Metamask Wallet</h5>
           <p className="text-left">
-            Trust the chain of chairty with cooperative store!
+            Empowering change through seamless giving and cooperative support.
+            Eery purchase drives impact.
           </p>
 
           <div className="d-flex w-100 border  justify-content-around align-items-center p-3 rounded-3 column-gap-3">
             {product ? (
               <div className="w-25 h-25">
                 <img src={product.img} alt={product.name} className="w-100" />
-                <h4>{product.price}</h4>
+                <h6>{product.name}</h6>
+                <h5>Price: {product.price} ETH</h5>
               </div>
             ) : (
               <div></div>
@@ -153,13 +184,9 @@ export function CampaignDetails() {
               />
 
               <div className="rounded-3">
-                <h4 className="text-white">
-                  Back it because you believe in it!
-                </h4>
-                {/* <p className="">
-                  Support the project for no reward, just because it speaks to
-                  you.
-                </p> */}
+                <h6 className="text-white">
+                  Every contribution counts—give with purpose, shop with heart."
+                </h6>
               </div>
 
               <CustomButton

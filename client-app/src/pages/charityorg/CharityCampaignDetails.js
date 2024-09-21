@@ -79,7 +79,7 @@ export function CharityCampaignDetails() {
               </div>
               <div>
                 <h4 className="text-white">{campaign.owner}</h4>
-                <p className="my-1">10 Campaigns</p>
+                <p className="my-1">Owner Campaign</p>
               </div>
             </div>
           </div>

@@ -32,7 +32,7 @@ export function ProductDetails() {
           <h4>Price: {state.price} ETH</h4>
           <h6 className="py-3">
             Want To Buy The Product? <br />
-            First Select A Chairty Campaign To Support!
+            First Select A Campaign of your choice.
           </h6>
           <CustomButton
             btnType="button"
@@ -40,13 +40,21 @@ export function ProductDetails() {
             styles="w-auto bg-primary"
             handleClick={handleBuy}
           />
+
+          <h6 className="py-3">
+            All the charity campaigns are supported by the Cooperative Stores.
+            They donate some percent of the product price to support the
+            campaign.
+          </h6>
         </div>
       </div>
 
       <div className="flex-2 d-flex flex-column p-4">
         <div>
           <h4 className="text-white text-uppercase">{state.name}</h4>
-
+          <div className="mt-1">
+            <p className="">{state.desc}</p>
+          </div>
           <div className="mt-1">
             <p className="">{state.more}</p>
           </div>

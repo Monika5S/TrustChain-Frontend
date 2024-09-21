@@ -46,6 +46,7 @@ export const StateContextProvider = ({ children }) => {
           form.targetGoal,
           new Date(form.deadline).getTime(), // deadline,
           form.image,
+          form.support_keyword,
         ],
       });
 
@@ -70,6 +71,7 @@ export const StateContextProvider = ({ children }) => {
       ),
       image: campaign.image,
       pId: i,
+      support_keyword: campaign.support_keyword,
     }));
 
     return parsedCampaings;
@@ -86,11 +88,11 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
-  const donate = async (pId, price, amount) => {
+  const donate = async (pId, price, amount, donate_percentage) => {
     console.log(price);
     const data = await contract.call(
       "donateToCampaign",
-      [pId, ethers.utils.parseEther(price)],
+      [pId, ethers.utils.parseEther(price), donate_percentage],
       {
         value: ethers.utils.parseEther(amount),
       }

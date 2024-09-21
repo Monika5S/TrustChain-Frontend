@@ -20,11 +20,11 @@ export const navlinks = {
       link: "/user-dashboard/campaigns",
     },
 
-    // {
-    //   name: "store",
-    //   imgUrl: payment,
-    //   link: "/store-dashboard/cooperative-store",
-    // },
+    {
+      name: "payments",
+      imgUrl: payment,
+      link: "/user-dashboard/payments",
+    },
     // {
     //   name: 'withdraw',
     //   imgUrl: withdraw,

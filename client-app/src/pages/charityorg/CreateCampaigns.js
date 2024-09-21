@@ -17,6 +17,7 @@ export function CreateCampaigns() {
     targetGoal: "",
     deadline: "",
     image: "",
+    support_keyword: "education",
     //documents etc.
   });
 
@@ -36,7 +37,7 @@ export function CreateCampaigns() {
           targetGoal: ethers.utils.parseEther(form.targetGoal),
         });
         setIsLoading(false); //campaign created
-        navigate("/");
+        navigate("/charity-dashboard");
       } else {
         alert("Provide valid image URL");
         setForm({ ...form, image: "" });

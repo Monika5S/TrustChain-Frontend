@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from "../context";
 import { CustomButton } from "./";
-import { thirdweb } from "../assets";
+import { thirdweb, payment } from "../assets";
 // import { metamaskWallet } from "@thirdweb-dev/react";
 // const metamaskConfig = metamaskWallet();
 
@@ -25,9 +25,9 @@ export function Navbar() {
           }}
         />
 
-        <Link to="/profile">
+        <Link to="#">
           <div className="rounded rounded-circle p-1 bg-dark d-flex justify-content-center align-items-center cursor-pointer">
-            <img src={thirdweb} alt="user" className="profile img-wrapper" />
+            <img src={payment} alt="user" className="profile img-wrapper" />
           </div>
         </Link>
       </div>

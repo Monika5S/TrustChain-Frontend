@@ -6,12 +6,13 @@ contract  CooperativeCharity{
         address owner;
         string title;
         string description;
-        uint target;
+        uint targetGoal;
         uint deadline;
         uint amountCollected;
         string image;
         address[] donators;
         uint[] donations;
+        string support_keyword;
     }
 
     mapping(uint=>Campaign) public campaigns; //to access the campaign list campaigns[0], campaigns[1] etc
@@ -19,7 +20,7 @@ contract  CooperativeCharity{
     uint public numberOfCampaigns=0;
 
 // function to create campaign and return id of that
-    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _target, uint256 _deadline, string memory _image) public returns (uint256) {
+    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _targetGoal, uint256 _deadline, string memory _image, string memory _support_keyword) public returns (uint256) {
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
         // require(campaign.deadline < block.timestamp, "The deadline should be a date in the future.");
@@ -27,10 +28,11 @@ contract  CooperativeCharity{
         campaign.owner = _owner;
         campaign.title = _title;
         campaign.description = _description;
-        campaign.target = _target;
+        campaign.targetGoal = _targetGoal;
         campaign.deadline = _deadline;
         campaign.amountCollected = 0;
         campaign.image = _image;
+        campaign.support_keyword = _support_keyword;
 
         numberOfCampaigns++;
 
@@ -53,21 +55,21 @@ contract  CooperativeCharity{
     //     }
     // }
 
-    function donateToCampaign(uint256 _id, uint256 price) public payable {
+    function donateToCampaign(uint256 _id, uint256 price, uint256 dn_percentage) public payable {
         
         require(msg.value >= price, "ETH sent is Insufficient!");
 
         Campaign storage campaign = campaigns[_id];
 
         // Calculating the amounts to send
-        uint256 campaignAmount = (price * 5) / 100; // 5% for the campaign owner
+        uint256 campaignAmount = (price * dn_percentage) / 100; // store set percentage 1-3% , 5% for the campaign owner
         uint256 storeAmount = price - campaignAmount; // Remaining amount for store owner
 
         //to check if charity target is less than 5% of price
-        if (campaign.target < campaignAmount) {
+        if (campaign.targetGoal < campaignAmount) {
             // Add remaining to store amount
-            storeAmount += campaignAmount - campaign.target;
-            campaignAmount = campaign.target;
+            storeAmount += campaignAmount - campaign.targetGoal;
+            campaignAmount = campaign.targetGoal;
         }
 
         // Transfer 5% to the campaign owner

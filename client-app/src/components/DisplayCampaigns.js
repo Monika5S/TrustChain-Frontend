@@ -13,6 +13,12 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
       state: { ...product, campaign },
     });
   }
+
+  // const filteredCampaigns = campaigns.filter(
+  //   (campaign) => campaign.support_keyword === product.support_cause
+  // );
+  const filteredCampaigns = campaigns;
+
   // console.log(product);
   return (
     <div className="px-4 w-100">
@@ -34,7 +40,7 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
         )}
 
         {!isLoading && campaigns.length > 0
-          ? campaigns.map((campaign) => (
+          ? filteredCampaigns.map((campaign) => (
               <CampaignCard
                 key={campaign.id}
                 {...campaign}

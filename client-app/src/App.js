@@ -7,6 +7,7 @@ import {
   AllProducts,
   ProductDetails,
   UserProfile,
+  PaymentHistory,
   CreateCampaigns,
   CharityCampaigns,
   CharityCampaignDetails,
@@ -23,7 +24,6 @@ import VerifyOtp from "./pages/VerifyOtp";
 import StoreDashboard from "./pages/store/StoreDashboard";
 import CharityDashboard from "./pages/charityorg/CharityDashboard";
 import UserDashboard from "./pages/user/UserDashboard";
-
 // import { Navbar, Sidebar } from "./components";
 
 export default function App() {
@@ -83,6 +83,7 @@ export default function App() {
             <Route path="campaigns/:id" element={<CampaignDetails />} />
             <Route path="products/:id" element={<ProductDetails />} />
             <Route path="profile" element={<UserProfile />} />
+            <Route path="payments" element={<PaymentHistory />} />
           </Route>
         </Routes>
 

@@ -1,7 +1,7 @@
 // CreateProduct.js
 import React, { useState } from "react";
 import { db } from "../../firebase"; // Ensure correct path to firebase config
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 
 export function CreateProduct() {
   const [productName, setProductName] = useState("");
@@ -20,6 +20,13 @@ export function CreateProduct() {
         throw new Error("Store ID is missing.");
       }
 
+      // Fetch store profile to get the cause
+      const storeProfileDoc = doc(db, "storeProfiles", storedUser.uid);
+      const storeDocSnap = await getDoc(storeProfileDoc);
+      const storeProfileData = storeDocSnap.exists()
+        ? storeDocSnap.data()
+        : null;
+
       const productData = {
         name: productName,
         img_url: productImg,
@@ -27,6 +34,8 @@ export function CreateProduct() {
         desc: productDesc,
         status,
         storeId, // Ensure storeId is properly defined
+        support_cause: storeProfileData.cause || "No cause defined",
+        donation_percentage: storeProfileData.donationPercentage || 1,
         createdAt: new Date(),
       };
 

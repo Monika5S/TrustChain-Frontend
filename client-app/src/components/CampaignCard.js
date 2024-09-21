@@ -11,6 +11,7 @@ export function CampaignCard({
   deadline,
   amountCollected,
   image,
+  support_keyword,
   handleClick,
 }) {
   const remainingDays = daysLeft(deadline);
@@ -29,7 +30,7 @@ export function CampaignCard({
       <div className="d-flex flex-column p-2">
         <div className="d-flex flex-row align-items-center">
           <img src={tagType} alt="tag" className="object-fit-contain" />
-          <p className="ms-2 mt-1 text-white">Category</p>
+          <p className="ms-2 mt-1 text-white">Category: {support_keyword}</p>
         </div>
 
         <div className="block mb-1">
