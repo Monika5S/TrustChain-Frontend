@@ -63,7 +63,7 @@ export function StoreProfile() {
   };
 
   return (
-    <div className="store-profile">
+    <div className="store-profile text-white">
       <h1>Store Profile</h1>
       {error && <p className="error">{error}</p>}
 
@@ -71,7 +71,7 @@ export function StoreProfile() {
         // Pass profile data to the ProfileForm with the handleSaveProfile callback
         <ProfileForm profile={profile} onSave={handleSaveProfile} />
       ) : (
-        <div>
+        <div className="p-4 text-white">
           <h2>Profile Details</h2>
           <p>Store Name: {profile?.storeName}</p>
           <p>Email: {profile?.email}</p>

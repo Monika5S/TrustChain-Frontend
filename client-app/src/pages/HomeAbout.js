@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 
 function HomeAbout() {
   return (
-    <div>
-      <header>
-        <h1>Welcome to Our Platform</h1>
+    <div className="bg-light-subtle p-4">
+      <header className="p-3 m-3 rounded">
+        <h1>👋 Welcome to TrustChain </h1>
         <p>
-          Your gateway to managing and supporting various charitable causes,
-          stores, and more.
+          Shop with Purpose, Make a Difference At TrustChain, we bring together
+          trusted stores and charities to create a seamless expereience for you
+          to support causes you care about, simply by purchasing the products.
         </p>
       </header>
       <main>
-        <section>
-          <h2>Get Started</h2>
-          <p>Sign up or log in to access your dashboard based on your role.</p>
+        <section className="bg-secondary p-3 m-3 border border-0 rounded text-dark">
+          <h2>⚙️ Get Started</h2>
+          <p>Sign up or log in to access the platform.</p>
           <nav>
             <ul>
               <li>
@@ -26,9 +27,43 @@ function HomeAbout() {
             </ul>
           </nav>
         </section>
+
+        <div className="p-3 m-3 rounded">
+          <h3>⚒️ How It Works</h3>
+          <h6>Browse Products</h6>
+          <p>
+            Shop for products from stores that commit to giving back. Each store
+            sets a donation percentage from your purchase price that goes
+            directly to charity.
+          </p>
+          <h6>Support a Charity</h6>
+          <p>
+            When you select a product, you'll also choose a charity campaign to
+            support based on the store's selected cause (e.g., education,
+            healthcare).
+          </p>
+          <h6>Purchase and Donate</h6>
+          <p>
+            Complete your purchase using your wallet (MetaMask), and watch as a
+            portion of your payment is directly transferred to the
+            charity—ensuring transparency every step of the way.
+          </p>
+          <h6>Get Your Donation Receipt</h6>
+          <p>
+            After your purchase, you'll receive a donation receipt for tax
+            purposes, showing the amount donated and the charity it was sent to.
+          </p>
+        </div>
+
+        <h6 className="bg-secondary p-3 m-3 border rounded text-dark">
+          🌍 Join the Movement
+          <br /> Whether you're shopping for a product or supporting a cause,
+          TrustChain lets you make a real difference with every purchase. Ready
+          to get started? Log in or sign up today.
+        </h6>
       </main>
       <footer>
-        <p>&copy; 2024 Our Platform. All rights reserved.</p>
+        <p>&copy; 2024 Our Platform. All rights reserved. 🌟</p>
       </footer>
     </div>
   );

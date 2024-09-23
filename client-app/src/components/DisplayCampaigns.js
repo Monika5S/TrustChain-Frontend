@@ -15,13 +15,14 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
   }
 
   var filteredCampaigns = campaigns;
-  if (product.support_keyword !== "all") {
+
+  if (product.support_cause !== "all") {
     filteredCampaigns = campaigns.filter(
       (campaign) => campaign.support_keyword === product.support_cause
     );
   }
 
-  // console.log(product);
+  console.log(product);
   return (
     <div className="px-4 w-100">
       <h1 className="text-white text-center">

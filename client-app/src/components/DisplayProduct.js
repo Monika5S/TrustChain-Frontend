@@ -5,6 +5,7 @@ export function DisplayProduct({ products, store }) {
   const navigate = useNavigate();
 
   const handleNavigate = (product) => {
+    console.log(product);
     if (store) {
       navigate(`/store-dashboard/products/${product.name}`, {
         state: product,

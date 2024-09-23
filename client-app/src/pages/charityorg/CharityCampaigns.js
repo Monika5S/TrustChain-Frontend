@@ -22,7 +22,7 @@ export function CharityCampaigns() {
 
   return (
     <div className="w-100">
-      <h1>all user campaigns</h1>
+      <h1>All Created campaigns</h1>
       <DisplayCharityCampaigns
         title="All Campaigns"
         isLoading={isLoading}

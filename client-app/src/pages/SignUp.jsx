@@ -5,6 +5,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const allowedNgos = {
   ngo123: "ngo123@example.com",
@@ -58,23 +59,28 @@ function SignUp() {
   };
 
   return (
-    <div>
+    <div className="m-5 bg-light-subtle p-4 border rounded">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+      <form
+        onSubmit={handleSignUp}
+        className="pt-3 d-flex flex-column w-25 row-gap-3"
+      >
+        <div className="d-flex column-gap-3">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -94,7 +100,9 @@ function SignUp() {
             required
           />
         )}
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="rounded border border-0 p-2 mx-3 ms-0">
+          Sign Up
+        </button>
       </form>
       {isCodeSent && (
         <p>
@@ -102,6 +110,11 @@ function SignUp() {
           inbox.
         </p>
       )}
+      <p className="pt-3 ">
+        Already have an account? <Link to="/login">Login</Link>
+      </p>
+      <br />
+      <Link to="/">Go Back</Link>
       {error && <p>{error}</p>}
     </div>
   );

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { auth, db } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { CustomButton } from "../components";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -54,9 +55,9 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className=" m-5 bg-light-subtle p-4 border rounded">
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className="pt-3">
         <input
           type="email"
           placeholder="Email"
@@ -73,6 +74,11 @@ function Login() {
         />
         <button type="submit">Login</button>
       </form>
+      <p className="pt-3 ">
+        Don't have an account? <Link to="/sign-up">Sign Up</Link>
+      </p>
+      <br></br>
+      <Link to="/">Go Back</Link>
       {error && <p>{error}</p>}
     </div>
   );

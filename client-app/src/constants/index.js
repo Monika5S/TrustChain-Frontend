@@ -14,11 +14,11 @@ export const navlinks = {
       imgUrl: dashboard,
       link: "/user-dashboard/products",
     },
-    {
-      name: "campaign",
-      imgUrl: createCampaign,
-      link: "/user-dashboard/campaigns",
-    },
+    // {
+    //   name: "campaign",
+    //   imgUrl: createCampaign,
+    //   link: "/user-dashboard/campaigns",
+    // },
 
     {
       name: "payments",

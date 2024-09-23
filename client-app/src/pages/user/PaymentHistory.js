@@ -57,7 +57,7 @@ export function PaymentHistory() {
         <p className="text-center text-white">No Payment History Available</p>
       )} */}
       {paymentHistory.length > 0 && (
-        <div className="history-table w-100">
+        <div className="history-table w-100 text-white">
           {paymentHistory.map((payment) => (
             <div key={payment.id} className="payment-item border-bottom py-3">
               <h4 className="text-white">Product: {payment.productName}</h4>
