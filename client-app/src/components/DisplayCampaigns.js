@@ -14,13 +14,19 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
     });
   }
 
-  var filteredCampaigns = campaigns;
-
-  if (product.support_cause !== "all") {
-    filteredCampaigns = campaigns.filter(
-      (campaign) => campaign.support_keyword === product.support_cause
-    );
-  }
+  // var filteredCampaigns = campaigns;
+  const filteredCampaigns =
+    product.support_cause !== "all"
+      ? campaigns
+      : campaigns.filter(
+          (campaign) => campaign.support_keyword === product.support_cause
+        );
+  // if (product.support_cause !== "all") {
+  //   // filtered
+  //   campaigns = campaigns.filter(
+  //     (campaign) => campaign.support_keyword === product.support_cause
+  //   );
+  // }
 
   console.log(product);
   return (

@@ -120,7 +120,7 @@ export function CreateCampaigns() {
           labelName="Supported Cause *"
           placeholder="Mention the cause campign supports (education, healthcare etc.)"
           inputType="text"
-          value={form.title}
+          value={form.support_keyword}
           handleChange={(e) => handleFormFieldChange("support_keyword", e)}
         />
 

@@ -50,7 +50,7 @@ export function PaymentHistory() {
   }, []);
 
   return (
-    <div className="payment-history-page w-100">
+    <div className="payment-history-page w-100 p-4 ">
       <h1 className="text-center text-white">Transaction Details</h1>
       {/* {error && <p className="text-center text-white">{error}</p>}
       {paymentHistory.length === 0 && !error && (
@@ -71,7 +71,7 @@ export function PaymentHistory() {
               <p>Donation: {payment.donatedAmount} ETH</p>
 
               <p>
-                Date:{" "}
+                Timestamp:{" "}
                 {payment.timestamp
                   ? new Date(
                       payment.timestamp.seconds * 1000

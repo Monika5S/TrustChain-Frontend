@@ -50,7 +50,7 @@ export function CreateProduct() {
   };
 
   return (
-    <div>
+    <div className="d-flex flex-column m-5 p-4 border rounded">
       <h1>Create a New Product</h1>
       {error && <p className="error">{error}</p>}
       <form>
@@ -60,27 +60,32 @@ export function CreateProduct() {
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
         />
+        <br />
         <input
           type="text"
           placeholder="Image URL"
           value={productImg}
           onChange={(e) => setProductImg(e.target.value)}
         />
+        <br />
         <input
           type="text"
           placeholder="Price"
           value={productPrice}
           onChange={(e) => setProductPrice(e.target.value)}
         />
+        <br />
         <textarea
           placeholder="Description"
           value={productDesc}
           onChange={(e) => setProductDesc(e.target.value)}
         />
+        <br />
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="available">Available</option>
           <option value="sold out">Sold Out</option>
         </select>
+        <br />
         <button type="button" onClick={handleCreateProduct}>
           Create Product
         </button>

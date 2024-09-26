@@ -38,7 +38,7 @@ export function CampaignDetails() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const userId = storedUser?.uid;
     try {
-      const donate_percentage = product.donate_percentage;
+      const donate_percentage = product.donation_percentage;
       const donate_amount = amount * (donate_percentage / 100);
       const paymentData = {
         userID: userId,
@@ -132,7 +132,7 @@ export function CampaignDetails() {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <h4 className="text-white text-uppercase">Donators</h4>
 
             <div className="d-flex flex-column column-gap-2">
@@ -152,7 +152,7 @@ export function CampaignDetails() {
                 <p className="">Be the first to join the cause!</p>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex-1">

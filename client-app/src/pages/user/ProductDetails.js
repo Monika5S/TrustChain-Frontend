@@ -12,6 +12,7 @@ export function ProductDetails() {
       img: state.img_url,
       price: state.price,
       desc: state.desc,
+      donation_percentage: state.donation_percentage,
     };
 
     navigate("/user-dashboard/campaigns", { state: { product } });

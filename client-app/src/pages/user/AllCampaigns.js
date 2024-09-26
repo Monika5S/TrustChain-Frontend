@@ -14,6 +14,7 @@ export function AllCampaigns() {
   async function fetchCampaigns() {
     setIsLoading(true);
     const data = await getCampaigns();
+    console.log(data);
     setCampaigns(data); //campaigns data to be shown on home page
     setIsLoading(false);
   }

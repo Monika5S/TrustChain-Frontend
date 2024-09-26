@@ -59,6 +59,7 @@ function Login() {
       <h2>Login</h2>
       <form onSubmit={handleLogin} className="pt-3">
         <input
+          className="p-2"
           type="email"
           placeholder="Email"
           value={email}
@@ -67,12 +68,18 @@ function Login() {
         />
         <input
           type="password"
+          className="p-2"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button
+          type="submit"
+          className="btn bg-dark text-white rounded mx-2 p-2"
+        >
+          Login
+        </button>
       </form>
       <p className="pt-3 ">
         Don't have an account? <Link to="/sign-up">Sign Up</Link>

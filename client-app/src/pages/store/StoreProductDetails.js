@@ -26,7 +26,7 @@ export function StoreProductDetails() {
           <h4 className="text-white text-uppercase">{state.name}</h4>
 
           <div className="mt-1">
-            <p className="">{state.more}</p>
+            <p className="">{state.desc}</p>
           </div>
         </div>
       </div>
