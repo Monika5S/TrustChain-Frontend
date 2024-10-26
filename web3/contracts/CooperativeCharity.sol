@@ -12,6 +12,7 @@ contract  CooperativeCharity{
         string image;
         address[] donators;
         uint[] donations;
+        string charity_org;
         string support_keyword;
     }
 
@@ -19,8 +20,12 @@ contract  CooperativeCharity{
     
     uint public numberOfCampaigns=0;
 
+    // Track unique charity organizations
+    string[] private charityOrgs;
+    mapping(string => bool) private charityOrgExists; // To prevent duplicates
+
 // function to create campaign and return id of that
-    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _targetGoal, uint256 _deadline, string memory _image, string memory _support_keyword) public returns (uint256) {
+    function createCampaign(address _owner, string memory _title, string memory _description, uint256 _targetGoal, uint256 _deadline, string memory _image, string memory _charity_org ,string memory _support_keyword) public returns (uint256) {
         Campaign storage campaign = campaigns[numberOfCampaigns];
 
         // require(campaign.deadline < block.timestamp, "The deadline should be a date in the future.");
@@ -32,9 +37,16 @@ contract  CooperativeCharity{
         campaign.deadline = _deadline;
         campaign.amountCollected = 0;
         campaign.image = _image;
+        campaign.charity_org = _charity_org;
         campaign.support_keyword = _support_keyword;
 
         numberOfCampaigns++;
+
+        // Add charity organization if it's not already in the list
+        if (!charityOrgExists[_charity_org]) {
+            charityOrgs.push(_charity_org);
+            charityOrgExists[_charity_org] = true; // Mark it as added
+        }
 
         return numberOfCampaigns - 1;
     }
@@ -100,5 +112,10 @@ contract  CooperativeCharity{
         }
 
         return allCampaigns;
+    }
+
+    // Function to get all unique charity organizations
+    function getCharityOrgs() public view returns (string[] memory) {
+        return charityOrgs;
     }
 }
