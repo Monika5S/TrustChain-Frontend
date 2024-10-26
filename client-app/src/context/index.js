@@ -6,12 +6,14 @@ import {
   EditionMetadataWithOwnerOutputSchema,
 } from "@thirdweb-dev/sdk";
 import { useMetamask, useDisconnect } from "@thirdweb-dev/react";
+import CooperativeCharityABI from "../CooperativeCharityABI.json";
 
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
   const { contract } = useContract(
-    "0x663f3ad617193148711d28f5334ee4ed07016602"
+    "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    CooperativeCharityABI
   );
   //
   // "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6" ->when user2 deploy
@@ -46,6 +48,7 @@ export const StateContextProvider = ({ children }) => {
           form.targetGoal,
           new Date(form.deadline).getTime(), // deadline,
           form.image,
+          form.charity_org,
           form.support_keyword,
         ],
       });
@@ -71,6 +74,7 @@ export const StateContextProvider = ({ children }) => {
       ),
       image: campaign.image,
       pId: i,
+      charity_org: campaign.charity_org,
       support_keyword: campaign.support_keyword,
     }));
 
