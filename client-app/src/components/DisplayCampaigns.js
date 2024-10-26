@@ -14,13 +14,36 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
     });
   }
 
-  // var filteredCampaigns = campaigns;
+  // var filteredCampaigns = campaigns; <- show this as an or option
+  //show what product supports campaign
+  // const filteredCampaigns =
+  //   product.support_cause !== "all"
+  //     ? campaigns
+  //     : campaigns.filter(
+  //         (campaign) =>
+  //           campaign.support_keyword === product.support_cause &&
+  //           campaign.charity_org === product.charity_org
+  //       );
+
+  // Filter campaigns based on the product's charity organization and support cause
+  const campaignsByOrgAndCause = campaigns.filter(
+    (campaign) =>
+      campaign.charity_org === product.charity_org &&
+      campaign.support_keyword === product.support_cause
+  );
+
+  const campaignsByCauseOnly = campaigns.filter(
+    (campaign) => campaign.support_keyword === product.support_cause
+  );
+
+  // Determine which campaigns to display
   const filteredCampaigns =
-    product.support_cause !== "all"
-      ? campaigns
-      : campaigns.filter(
-          (campaign) => campaign.support_keyword === product.support_cause
-        );
+    campaignsByOrgAndCause.length > 0
+      ? campaignsByOrgAndCause
+      : campaignsByCauseOnly.length > 0
+      ? campaignsByCauseOnly
+      : campaigns;
+
   // if (product.support_cause !== "all") {
   //   // filtered
   //   campaigns = campaigns.filter(
