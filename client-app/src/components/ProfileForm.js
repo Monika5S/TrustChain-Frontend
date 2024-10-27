@@ -1,14 +1,20 @@
 // src/components/ProfileForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useStateContext } from "../context"; // Assuming useStateContext is available for context
 
 export function ProfileForm({ profile, onSave }) {
   const [formData, setFormData] = useState({
     storeName: profile?.storeName || "",
     // email: profile?.email || "",
     cause: profile?.cause || "",
+    charity_org: profile?.charity_org || "",
     donationPercentage: profile?.donationPercentage || 1,
   });
   const [error, setError] = useState("");
+
+  const [charity_orgs, setCharityOrgs] = useState([]);
+  // Getting contract from context
+  const { contract, address, getCharityOrgs } = useStateContext();
 
   const causes = [
     "Education",
@@ -17,6 +23,23 @@ export function ProfileForm({ profile, onSave }) {
     "Animal Welfare",
     "Poverty Alleviation",
   ];
+
+  // Function to fetch charity organizations from the contract
+  async function fetchCharityOrgs() {
+    try {
+      const orgs = await getCharityOrgs(); // Call the function from the context
+      setCharityOrgs(orgs);
+    } catch (error) {
+      console.error("Failed to fetch charity organizations:", error);
+    }
+  }
+
+  // Fetch charity organizations when the component mounts and contract is available
+  useEffect(() => {
+    if (contract) {
+      fetchCharityOrgs();
+    }
+  }, [contract]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,6 +94,23 @@ export function ProfileForm({ profile, onSave }) {
           {causes.map((cause) => (
             <option key={cause} value={cause}>
               {cause}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label>Support Charity Organization:</label>
+        <select
+          name="charity_org"
+          value={formData.charity_org}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select a Campaign</option>
+          {charity_orgs.map((charity_org) => (
+            <option key={charity_org} value={charity_org}>
+              {charity_org}
             </option>
           ))}
         </select>

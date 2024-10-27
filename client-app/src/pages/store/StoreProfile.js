@@ -76,6 +76,7 @@ export function StoreProfile() {
           <p>Store Name: {profile?.storeName}</p>
           <p>Email: {profile?.email}</p>
           <p>Cause: {profile?.cause}</p>
+          <p>Support Charity Org: {profile?.charity_org}</p>
           <p>Donation Percentage: {profile?.donationPercentage}%</p>
           <button onClick={() => setIsEditing(true)}>Update Profile</button>
         </div>

@@ -34,6 +34,7 @@ export function CreateProduct() {
         desc: productDesc,
         status,
         storeId, // Ensure storeId is properly defined
+        charity_org: storeProfileData.charity_org,
         support_cause: storeProfileData.cause || "all",
         donation_percentage: storeProfileData.donationPercentage || 1,
         createdAt: new Date(),
