@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
-// import { money } from "../assets";
 import { CustomButton, FormField } from "../../components";
 import { checkIfImage } from "../../utils";
 import { useStateContext } from "../../context";
@@ -9,7 +8,7 @@ import { useStateContext } from "../../context";
 export function CreateCampaigns() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { createCampaign } = useStateContext();
+  const { createCampaign, address } = useStateContext(); // Access the address from context
   const [form, setForm] = useState({
     name: "",
     title: "",
@@ -17,28 +16,55 @@ export function CreateCampaigns() {
     targetGoal: "",
     deadline: "",
     image: "",
+    charity_org: "trustchain",
     support_keyword: "all",
-    //documents etc.
   });
 
-  //handles key presses event and updates the new field value
+  // handles key presses event and updates the new field value
   function handleFormFieldChange(fieldName, e) {
     setForm({ ...form, [fieldName]: e.target.value });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    // Check if MetaMask is installed
+    if (!window.ethereum) {
+      alert("MetaMask is not installed. Please install MetaMask to proceed.");
+      return;
+    }
+
+    // Check if the user is connected
+    if (!address) {
+      alert("Please connect your wallet to create a charity project.");
+      return;
+    }
+
     checkIfImage(form.image, async (exists) => {
       if (exists) {
-        setIsLoading(true); //while campaign been creating!
-        await createCampaign({
-          ...form,
-          targetGoal: ethers.utils.parseEther(form.targetGoal),
-        });
-        setIsLoading(false); //campaign created
-        navigate("/charity-dashboard");
+        setIsLoading(true); // while campaign is being created!
+        try {
+          // Attempt to create the campaign
+          await createCampaign({
+            ...form,
+            targetGoal: ethers.utils.parseEther(form.targetGoal),
+          });
+
+          // If successful, navigate to the dashboard
+          navigate("/charity-dashboard");
+        } catch (error) {
+          // Handle specific error scenarios
+          if (error.message.includes("User rejected")) {
+            alert("Transaction was rejected. Please try again.");
+          } else {
+            console.error("Error creating campaign:", error);
+            alert("Error creating campaign. Please try again.");
+          }
+        } finally {
+          setIsLoading(false); // Reset loading state
+        }
       } else {
-        alert("Provide valid image URL");
+        alert("Provide a valid image URL");
         setForm({ ...form, image: "" });
       }
     });
@@ -80,17 +106,6 @@ export function CreateCampaigns() {
           handleChange={(e) => handleFormFieldChange("description", e)}
         />
 
-        {/* <div className="w-full flex justify-start items-center p-4 bg-[#8c6dfd] h-[120px] rounded-[10px]">
-          <img
-            src={money}
-            alt="money"
-            className="w-[40px] h-[40px] object-contain"
-          />
-          <h4 className="font-epilogue font-bold text-[25px] text-white ml-[20px]">
-            You will get 100% of the raised amount
-          </h4>
-        </div> */}
-
         <div className="d-flex column-gap-4">
           <FormField
             labelName="Goal *"
@@ -109,20 +124,29 @@ export function CreateCampaigns() {
         </div>
 
         <FormField
-          labelName="Project image *"
+          labelName="Project Image *"
           placeholder="Place image URL of your charity project"
           inputType="url"
           value={form.image}
           handleChange={(e) => handleFormFieldChange("image", e)}
         />
 
-        <FormField
-          labelName="Supported Cause *"
-          placeholder="Mention the cause campign supports (education, healthcare etc.)"
-          inputType="text"
-          value={form.support_keyword}
-          handleChange={(e) => handleFormFieldChange("support_keyword", e)}
-        />
+        <div className="d-flex column-gap-4">
+          <FormField
+            labelName="Charity Organization Name *"
+            placeholder="Mention the cause campaign supports (education, healthcare, etc.)"
+            inputType="text"
+            value={form.charity_org}
+            handleChange={(e) => handleFormFieldChange("charity_org", e)}
+          />
+          <FormField
+            labelName="Supported Cause *"
+            placeholder="Mention the cause campaign supports (education, healthcare, etc.)"
+            inputType="text"
+            value={form.support_keyword}
+            handleChange={(e) => handleFormFieldChange("support_keyword", e)}
+          />
+        </div>
 
         <div className="d-flex justify-content-center align-items-center mt-4">
           <CustomButton

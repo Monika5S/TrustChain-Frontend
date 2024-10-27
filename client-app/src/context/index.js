@@ -56,6 +56,7 @@ export const StateContextProvider = ({ children }) => {
       console.log("contract call success", data);
     } catch (error) {
       console.log("contract call failure", error);
+      throw new Error(error.message);
     }
   };
 
@@ -102,6 +103,7 @@ export const StateContextProvider = ({ children }) => {
       }
     );
 
+    console.log(data);
     return data;
   };
 
@@ -121,6 +123,22 @@ export const StateContextProvider = ({ children }) => {
     return parsedDonations;
   };
 
+  const getCharityOrgs = async () => {
+    const charitys = await contract.call("getCharityOrgs");
+    // const numberOfDonations = donations[0].length;
+
+    // const parsedDonations = [];
+
+    // for (let i = 0; i < numberOfDonations; i++) {
+    //   parsedDonations.push({
+    //     donator: donations[0][i],
+    //     donation: ethers.utils.formatEther(donations[1][i].toString()),
+    //   });
+    // }
+
+    return charitys;
+  };
+
   return (
     <StateContext.Provider
       value={{
@@ -133,6 +151,7 @@ export const StateContextProvider = ({ children }) => {
         getUserCampaigns,
         donate,
         getDonations,
+        getCharityOrgs,
       }}
     >
       {children}

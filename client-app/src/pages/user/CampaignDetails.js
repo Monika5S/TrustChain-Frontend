@@ -34,12 +34,27 @@ export function CampaignDetails() {
   }, [contract, address]);
 
   const handleDonate = async () => {
+    if (!window.ethereum) {
+      alert("MetaMask is not installed. Please install MetaMask to proceed.");
+      return;
+    }
+
+    if (!address) {
+      alert("Please connect your wallet to donate."); // Alert user if not connected
+      return; // Exit the function if wallet is not connected
+    }
+
     setIsLoading(true);
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const userId = storedUser?.uid;
+
     try {
       const donate_percentage = product.donation_percentage;
       const donate_amount = amount * (donate_percentage / 100);
+
+      // Call the function to handle the transaction logic
+      await donate(campaign.pId, product.price, amount, donate_percentage);
+
       const paymentData = {
         userID: userId,
         userWallet: address, // User's wallet address
@@ -54,21 +69,20 @@ export function CampaignDetails() {
       };
       console.log(paymentData);
 
+      // Store the payment data in Firestore
       await addDoc(collection(db, "payments"), paymentData);
 
-      await donate(campaign.pId, product.price, amount, donate_percentage);
-
+      // Navigate to payments page after successful donation
       navigate("/user-dashboard/payments");
     } catch (error) {
-      console.error("Error processing donation or storing payment:", error);
+      console.error("Error processing payement:", error);
+      alert("Error processing your payement. Please try again."); // Provide user feedback
+    } finally {
+      setIsLoading(false); // Reset loading state
     }
-
-    // await donate(campaign.pId, product.price, amount, donate_percentage);
-
-    // navigate("/");
-    setIsLoading(false);
   };
 
+  // const handleDonate = async () => {
   return (
     <div className="px-5 py-3 my-3 mx-5 w-75 border border-3 rounded-5 text-white">
       {isLoading && "Loading"}
