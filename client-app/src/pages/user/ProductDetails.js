@@ -13,6 +13,7 @@ export function ProductDetails() {
       price: state.price,
       desc: state.desc,
       donation_percentage: state.donation_percentage,
+      store_address: state.store_address,
     };
 
     navigate("/user-dashboard/campaigns", { state: { product } });

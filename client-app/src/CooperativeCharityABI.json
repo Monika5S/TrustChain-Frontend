@@ -128,6 +128,11 @@
         "internalType": "uint256",
         "name": "dn_percentage",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "store_address",
+        "type": "address"
       }
     ],
     "name": "donateToCampaign",

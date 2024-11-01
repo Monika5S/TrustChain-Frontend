@@ -78,6 +78,7 @@ export function StoreProfile() {
           <p>Cause: {profile?.cause}</p>
           <p>Support Charity Org: {profile?.charity_org}</p>
           <p>Donation Percentage: {profile?.donationPercentage}%</p>
+          <p>MetaMask Wallet Address: {profile?.store_address}</p>
           <button onClick={() => setIsEditing(true)}>Update Profile</button>
         </div>
       )}

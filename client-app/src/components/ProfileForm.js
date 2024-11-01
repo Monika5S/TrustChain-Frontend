@@ -105,7 +105,7 @@ export function ProfileForm({ profile, onSave }) {
           name="charity_org"
           value={formData.charity_org}
           onChange={handleChange}
-          required
+          // required
         >
           <option value="">Select a Campaign</option>
           {charity_orgs.map((charity_org) => (
@@ -124,6 +124,17 @@ export function ProfileForm({ profile, onSave }) {
           onChange={handleChange}
           min="1"
           max="5"
+        />
+      </div>
+
+      <div>
+        <label>MetaMask Wallet Address:</label>
+        <input
+          type="text"
+          name="store_address"
+          value={formData.store_address}
+          onChange={handleChange}
+          required
         />
       </div>
       <button type="submit">

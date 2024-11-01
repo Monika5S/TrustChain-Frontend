@@ -53,7 +53,13 @@ export function CampaignDetails() {
       const donate_amount = amount * (donate_percentage / 100);
 
       // Call the function to handle the transaction logic
-      await donate(campaign.pId, product.price, amount, donate_percentage);
+      await donate(
+        campaign.pId,
+        product.price,
+        amount,
+        donate_percentage,
+        product.store_address
+      );
 
       const paymentData = {
         userID: userId,
@@ -74,6 +80,11 @@ export function CampaignDetails() {
 
       // Navigate to payments page after successful donation
       navigate("/user-dashboard/payments");
+
+      // Set a timeout to reload after a short delay
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000); // 1 second delay (adjust as needed)
     } catch (error) {
       console.error("Error processing payement:", error);
       alert("Error processing your payement. Please try again."); // Provide user feedback
