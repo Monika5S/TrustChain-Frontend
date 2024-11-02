@@ -52,28 +52,31 @@ export function CampaignDetails() {
       const donate_percentage = product.donation_percentage;
       const donate_amount = amount * (donate_percentage / 100);
 
-      // Call the function to handle the transaction logic
-      await donate(
+      // Call the donate function and get the transaction receipt
+      const txReceipt = await donate(
         campaign.pId,
         product.price,
         amount,
         donate_percentage,
         product.store_address
       );
-
+      // console.log(txReceipt, txReceipt.receipt.transactionHash);
+      const transactionHash = txReceipt?.receipt.transactionHash;
+      // Prepare payment data
       const paymentData = {
         userID: userId,
-        userWallet: address, // User's wallet address
+        userWallet: address,
         productName: product.name,
         productPrice: product.price,
-        storeWallet: campaign.owner,
+        storeWallet: product.store_address,
+        charityWallet: campaign.owner,
         campaignTitle: campaign.title,
         campaignId: campaign.pId,
         PaidAmount: amount,
         donatedAmount: donate_amount,
         timestamp: new Date(),
+        transactionHash: transactionHash, // Get the transaction hash from the receipt
       };
-      console.log(paymentData);
 
       // Store the payment data in Firestore
       await addDoc(collection(db, "payments"), paymentData);

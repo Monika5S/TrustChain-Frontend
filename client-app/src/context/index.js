@@ -93,6 +93,25 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
+  // const donate = async (
+  //   pId,
+  //   price,
+  //   amount,
+  //   donate_percentage,
+  //   store_address
+  // ) => {
+  //   // console.log(price);
+  //   const data = await contract.call(
+  //     "donateToCampaign",
+  //     [pId, ethers.utils.parseEther(price), donate_percentage, store_address],
+  //     {
+  //       value: ethers.utils.parseEther(amount),
+  //     }
+  //   );
+
+  //   console.log(data);
+  //   return data;
+  // };
   const donate = async (
     pId,
     price,
@@ -100,17 +119,22 @@ export const StateContextProvider = ({ children }) => {
     donate_percentage,
     store_address
   ) => {
-    // console.log(price);
-    const data = await contract.call(
-      "donateToCampaign",
-      [pId, ethers.utils.parseEther(price), donate_percentage, store_address],
-      {
-        value: ethers.utils.parseEther(amount),
-      }
-    );
+    try {
+      const tx = await contract.call(
+        "donateToCampaign",
+        [pId, ethers.utils.parseEther(price), donate_percentage, store_address],
+        {
+          value: ethers.utils.parseEther(amount),
+        }
+      );
 
-    console.log(data);
-    return data;
+      console.log("Transaction receipt:", tx);
+
+      return tx;
+    } catch (error) {
+      console.error("Error in donate function:", error);
+      throw error;
+    }
   };
 
   const getDonations = async (pId) => {
