@@ -57,6 +57,10 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
       <h1 className="text-white text-center">
         {title} ({campaigns.length})
       </h1>
+      <h6 className="text-white text-center p-2">
+        select a charity campaign of your choice to continue the product
+        purchase!
+      </h6>
 
       <div className="w-100 d-flex mt-4 column-gap-4 text-white justify-content-around align-items-start">
         {isLoading ? (
