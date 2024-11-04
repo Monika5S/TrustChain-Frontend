@@ -16,7 +16,12 @@ export function ProductDetails() {
       store_address: state.store_address,
     };
 
-    navigate("/user-dashboard/campaigns", { state: { product } });
+    if (state.donation_percentage < 1) {
+      // Navigate to the campaign details page with only product data
+      navigate("/user-dashboard/campaigns/none", { state: { product } });
+    } else {
+      navigate("/user-dashboard/campaigns", { state: { product } });
+    }
   }
 
   return (

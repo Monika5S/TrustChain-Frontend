@@ -21,10 +21,10 @@ export function CampaignDetails() {
   const [amount, setAmount] = useState("");
   const [donators, setDonators] = useState([]);
 
-  const remainingDays = daysLeft(campaign.deadline);
+  const remainingDays = campaign ? daysLeft(campaign.deadline) : "";
 
   const fetchDonators = async () => {
-    const data = await getDonations(campaign.pId);
+    const data = campaign ? await getDonations(campaign.pId) : "";
 
     setDonators(data);
   };
@@ -54,61 +54,58 @@ export function CampaignDetails() {
 
       // Call the donate function and get the transaction receipt
       const txReceipt = await donate(
-        campaign.pId,
+        campaign?.pId || 0,
         product.price,
         amount,
         donate_percentage,
         product.store_address
       );
-      // console.log(txReceipt, txReceipt.receipt.transactionHash);
+
       const transactionHash = txReceipt?.receipt.transactionHash;
-      // Prepare payment data
+
       const paymentData = {
         userID: userId,
         userWallet: address,
         productName: product.name,
         productPrice: product.price,
         storeWallet: product.store_address,
-        charityWallet: campaign.owner,
-        campaignTitle: campaign.title,
-        campaignId: campaign.pId,
+
+        charityWallet: campaign?.owner || null,
+        campaignTitle: campaign?.title || "Direct Purchase",
+        campaignId: campaign?.pId || -1,
         PaidAmount: amount,
         donatedAmount: donate_amount,
         timestamp: new Date(),
-        transactionHash: transactionHash, // Get the transaction hash from the receipt
+        transactionHash: transactionHash,
       };
 
-      // Store the payment data in Firestore
       await addDoc(collection(db, "payments"), paymentData);
-
-      // Navigate to payments page after successful donation
       navigate("/user-dashboard/payments");
 
-      // Set a timeout to reload after a short delay
       setTimeout(() => {
         window.location.reload();
-      }, 1000); // 1 second delay (adjust as needed)
+      }, 1000);
     } catch (error) {
       console.error("Error processing payement:", error);
-      alert("Error processing your payement. Please try again."); // Provide user feedback
+      alert("Error processing your payement. Please try again.");
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 
-  // const handleDonate = async () => {
   return (
     <div className="px-5 py-3 my-3 mx-5 w-75 border border-3 rounded-5 text-white">
       {isLoading && "Loading"}
 
-      <div className="w-100 p-5 d-flex justify-content-around align-items-center mt-2">
-        <div className="flex-1">
-          <img
-            src={campaign.image}
-            alt="campaign"
-            className="w-100 object-fit-cover rounded-5"
-          />
-          {/* <div className="mt-2 bg-secondary">
+      {campaign ? (
+        <div className="w-100 p-5 d-flex justify-content-around align-items-center mt-2">
+          <div className="flex-1">
+            <img
+              src={campaign?.image}
+              alt="campaign"
+              className="w-100 object-fit-cover rounded-5"
+            />
+            {/* <div className="mt-2 bg-secondary">
             <div
               className="bg-dark-subtle"
               style={{
@@ -120,68 +117,53 @@ export function CampaignDetails() {
               }}
             ></div>
           </div> */}
-        </div>
+          </div>
 
-        <div className="w-100 d-flex flex-row justify-content-center align-items-center">
-          <CountBox title="Days Left" value={remainingDays} />
-          <CountBox
-            title={`Raised of ${campaign.targetGoal}`}
-            value={campaign.amountCollected}
-          />
-          <CountBox title="Total Donators" value={donators.length} />
+          <div className="w-100 d-flex flex-row justify-content-center align-items-center">
+            <CountBox title="Days Left" value={remainingDays} />
+            <CountBox
+              title={`Raised of ${campaign?.targetGoal}`}
+              value={campaign?.amountCollected}
+            />
+            <CountBox title="Total Donators" value={donators.length} />
+          </div>
         </div>
-      </div>
+      ) : (
+        <p>This is a direct purchase with no associated campaign.</p>
+      )}
 
       <div className="mt-1 d-flex flex-column column-gap-5">
-        <div className="flex-2 d-flex flex-column">
-          <div>
-            <h4 className="text-white uppercase">Creator</h4>
+        {campaign ? (
+          <div className="flex-2 d-flex flex-column">
+            <div>
+              <h4 className="text-white uppercase">Creator</h4>
 
-            <div className="my-2 d-flex flex-row align-items-center">
-              <div className="w-25 h-25 d-flex align-items-center justify-content-center rounded-5 cursor-pointer">
-                <img
-                  src={thirdweb}
-                  alt="user"
-                  className="w-25 h-25 object-fit-contain"
-                />
+              <div className="my-2 d-flex flex-row align-items-center">
+                <div className="w-25 h-25 d-flex align-items-center justify-content-center rounded-5 cursor-pointer">
+                  <img
+                    src={thirdweb}
+                    alt="user"
+                    className="w-25 h-25 object-fit-contain"
+                  />
+                </div>
+                <div>
+                  <h4 className="text-white">{campaign.owner}</h4>
+                  <p className="my-1">Owner Campaign</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-white">{campaign.owner}</h4>
-                <p className="my-1">Owner Campaign</p>
+            </div>
+
+            <div>
+              <h4 className="text-white text-uppercase">Description</h4>
+
+              <div className="mt-1">
+                <p className="">{campaign.description}</p>
               </div>
             </div>
           </div>
-
-          <div>
-            <h4 className="text-white text-uppercase">Description</h4>
-
-            <div className="mt-1">
-              <p className="">{campaign.description}</p>
-            </div>
-          </div>
-
-          {/* <div>
-            <h4 className="text-white text-uppercase">Donators</h4>
-
-            <div className="d-flex flex-column column-gap-2">
-              {donators.length > 0 ? (
-                donators.map((item, index) => (
-                  <div
-                    key={`${item.donator}-${index}`}
-                    className="d-flex justify-content-start align-items-center column-gap-2"
-                  >
-                    <p className="">
-                      {index + 1}. {item.donator}
-                    </p>
-                    <p className="">{item.donation}</p>
-                  </div>
-                ))
-              ) : (
-                <p className="">Be the first to join the cause!</p>
-              )}
-            </div>
-          </div> */}
-        </div>
+        ) : (
+          <p>🛍️</p>
+        )}
 
         <div className="flex-1">
           <h5 className="text-white">Pay using Metamask Wallet</h5>
