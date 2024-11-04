@@ -26,7 +26,7 @@ export function AllCampaigns() {
 
   return (
     <DisplayCampaigns
-      title="All Campaigns"
+      title="Store Supported Charity Campaigns"
       isLoading={isLoading}
       campaigns={campaigns}
       product={state}

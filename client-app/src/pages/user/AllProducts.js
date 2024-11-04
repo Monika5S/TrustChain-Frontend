@@ -27,7 +27,7 @@ export function AllProducts() {
 
   return (
     <div className="all-store-products w-100 text-white">
-      <h2 className="text-center">All Digital Products</h2>
+      {/* <h2 className="text-center">All Digital Products</h2> */}
       {error && <p className="error">{error}</p>}
       <DisplayProduct products={products} />
     </div>

@@ -1,6 +1,7 @@
-// CreateProduct.js
 import React, { useState } from "react";
-import { db } from "../../firebase"; // Ensure correct path to firebase config
+import { useNavigate } from "react-router-dom";
+import { db } from "../../firebase";
+import { CustomButton } from "../../components";
 import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 
 export function CreateProduct() {
@@ -10,11 +11,12 @@ export function CreateProduct() {
   const [productDesc, setProductDesc] = useState("");
   const [status, setStatus] = useState("available");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleCreateProduct = async () => {
     try {
       const storedUser = JSON.parse(localStorage.getItem("user"));
-      const storeId = storedUser?.uid; // Fetch storeId or UID of the store owner
+      const storeId = storedUser?.uid;
 
       if (!storeId) {
         throw new Error("Store ID is missing.");
@@ -33,7 +35,7 @@ export function CreateProduct() {
         price: productPrice,
         desc: productDesc,
         status,
-        storeId, // Ensure storeId is properly defined
+        storeId,
         charity_org: storeProfileData.charity_org,
         store_address: storeProfileData.store_address,
         support_cause: storeProfileData.cause || "all",
@@ -43,8 +45,10 @@ export function CreateProduct() {
 
       console.log("Creating Product with Data:", productData);
 
-      await addDoc(collection(db, "products"), productData);
-      alert("Product created successfully.");
+      await addDoc(collection(db, "products"), productData).then(() => {
+        alert("Product created successfully.");
+      });
+      navigate("/store-dashboard/products/");
     } catch (error) {
       console.error("Failed to create product:", error.message);
       setError(`Failed to create product. Please try again. ${error.message}`);
@@ -52,10 +56,11 @@ export function CreateProduct() {
   };
 
   return (
-    <div className="d-flex flex-column m-5 p-4 border rounded">
-      <h1>Create a New Product</h1>
+    <div className="d-flex text-white flex-column m-5 ">
+      <h1 className="p-3">Create a New Product</h1>
       {error && <p className="error">{error}</p>}
-      <form>
+      <form className="d-flex flex-column px-5 py-4 border rounded">
+        <label>Product Name</label>
         <input
           type="text"
           placeholder="Product Name"
@@ -63,6 +68,8 @@ export function CreateProduct() {
           onChange={(e) => setProductName(e.target.value)}
         />
         <br />
+
+        <label>Product Image</label>
         <input
           type="text"
           placeholder="Image URL"
@@ -70,6 +77,8 @@ export function CreateProduct() {
           onChange={(e) => setProductImg(e.target.value)}
         />
         <br />
+
+        <label>Product Price</label>
         <input
           type="text"
           placeholder="Price"
@@ -77,18 +86,26 @@ export function CreateProduct() {
           onChange={(e) => setProductPrice(e.target.value)}
         />
         <br />
+
+        <label>Product Description</label>
         <textarea
           placeholder="Description"
           value={productDesc}
           onChange={(e) => setProductDesc(e.target.value)}
         />
         <br />
+
+        <label>Product Availability</label>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="available">Available</option>
           <option value="sold out">Sold Out</option>
         </select>
         <br />
-        <button type="button" onClick={handleCreateProduct}>
+        <button
+          type="button"
+          className="p-2 rounded w-50 text-white bg-primary border border-0"
+          onClick={handleCreateProduct}
+        >
           Create Product
         </button>
       </form>
