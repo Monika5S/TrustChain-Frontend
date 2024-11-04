@@ -51,7 +51,7 @@ export function ProfileForm({ profile, onSave }) {
     setError("");
 
     // Validate donation percentage
-    if (formData.donationPercentage < 1 || formData.donationPercentage > 5) {
+    if (formData.donationPercentage < 0 || formData.donationPercentage > 5) {
       setError("Donation percentage must be between 1% and 5%.");
       return;
     }
@@ -116,13 +116,13 @@ export function ProfileForm({ profile, onSave }) {
         </select>
       </div>
       <div>
-        <label>Donation Percentage (1% - 5%):</label>
+        <label>Donation Percentage (0% - 5%):</label>
         <input
           type="number"
           name="donationPercentage"
           value={formData.donationPercentage}
           onChange={handleChange}
-          min="1"
+          min="0"
           max="5"
         />
       </div>

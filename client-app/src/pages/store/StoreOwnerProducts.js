@@ -42,7 +42,7 @@ export function StoreOwnerProducts() {
 
   return (
     <div className="store-owner-products w-100 text-center text-white">
-      <h2>Your Created Products</h2>
+      {/* <h2>Your Products</h2> */}
       {error && <p className="error">{error}</p>}
       <DisplayProduct products={products} store={true} />
     </div>
