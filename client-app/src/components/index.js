@@ -6,4 +6,5 @@ export { DisplayCampaigns } from "./DisplayCampaigns";
 export { DisplayProduct } from "./DisplayProduct";
 export { CountBox } from "./CountBox";
 export { ProfileForm } from "./ProfileForm";
+export { UserProfileForm } from "./UserProfileForm";
 export { DisplayCharityCampaigns } from "./DisplayCharityCampaigns.js";
