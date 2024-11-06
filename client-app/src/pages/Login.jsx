@@ -9,6 +9,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // state to toggle password visibility
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -55,38 +56,48 @@ function Login() {
   };
 
   return (
-    <div className=" m-5 bg-light-subtle p-4 border rounded">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin} className="pt-3">
-        <input
-          className="p-2"
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          className="p-2"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button
-          type="submit"
-          className="btn bg-dark text-white rounded mx-2 p-2"
-        >
-          Login
-        </button>
-      </form>
-      <p className="pt-3 ">
-        Don't have an account? <Link to="/sign-up">Sign Up</Link>
-      </p>
-      <br></br>
-      <Link to="/">Go Back</Link>
-      {error && <p>{error}</p>}
+    <div className="d-flex align-items-center justify-content-center mt-2">
+      <div className="m-5 bg-light-subtle p-4 border rounded w-50">
+        <h2>Login</h2>
+        <form onSubmit={handleLogin} className="pt-3">
+          <div className="mb-3 d-flex flex-row">
+            <input
+              className="p-2"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+            <input
+              type={showPassword ? "text" : "password"} // To show password
+              className="p-2 ms-2"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="show-password-btn border border-0 bg-secondary text-white p-2"
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+
+          <button type="submit" className="btn bg-dark text-white rounded px-3">
+            Login
+          </button>
+        </form>
+        <p className="pt-3 ">
+          Don't have an account? <Link to="/sign-up">Sign Up</Link>
+        </p>
+        <br />
+        <Link to="/">Go Back</Link>
+        {error && <p>{error}</p>}
+      </div>
     </div>
   );
 }
