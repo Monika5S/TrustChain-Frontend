@@ -73,7 +73,8 @@ export function PaymentHistory() {
 
               <h6>Campaign Donation Data</h6>
               <p>Campaign: {payment.campaignTitle}</p>
-              <p>Campaign ID: {payment.campaignId}</p>
+              <p>Campaign Owner(Metamask): {payment.charityWallet}</p>
+              {/* <p>Campaign ID: {payment.campaignId}</p> */}
               <p>Donation: {payment.donatedAmount} ETH</p>
 
               <p>

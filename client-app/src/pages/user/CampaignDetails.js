@@ -97,74 +97,7 @@ export function CampaignDetails() {
     <div className="px-5 py-3 my-3 mx-5 w-75 border border-3 rounded-5 text-white">
       {isLoading && "Loading"}
 
-      {campaign ? (
-        <div className="w-100 p-5 d-flex justify-content-around align-items-center mt-2">
-          <div className="flex-1">
-            <img
-              src={campaign?.image}
-              alt="campaign"
-              className="w-100 object-fit-cover rounded-5"
-            />
-            {/* <div className="mt-2 bg-secondary">
-            <div
-              className="bg-dark-subtle"
-              style={{
-                width: `${calculateBarPercentage(
-                  state.targetGoal,
-                  state.amountCollected
-                )}%`,
-                maxWidth: "100%",
-              }}
-            ></div>
-          </div> */}
-          </div>
-
-          <div className="w-100 d-flex flex-row justify-content-center align-items-center">
-            <CountBox title="Days Left" value={remainingDays} />
-            <CountBox
-              title={`Raised of ${campaign?.targetGoal}`}
-              value={campaign?.amountCollected}
-            />
-            <CountBox title="Total Donators" value={donators.length} />
-          </div>
-        </div>
-      ) : (
-        <p>This is a direct purchase with no associated campaign.</p>
-      )}
-
       <div className="mt-1 d-flex flex-column column-gap-5">
-        {campaign ? (
-          <div className="flex-2 d-flex flex-column">
-            <div>
-              <h4 className="text-white uppercase">Creator</h4>
-
-              <div className="my-2 d-flex flex-row align-items-center">
-                <div className="w-25 h-25 d-flex align-items-center justify-content-center rounded-5 cursor-pointer">
-                  <img
-                    src={thirdweb}
-                    alt="user"
-                    className="w-25 h-25 object-fit-contain"
-                  />
-                </div>
-                <div>
-                  <h4 className="text-white">{campaign.owner}</h4>
-                  <p className="my-1">Owner Campaign</p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="text-white text-uppercase">Description</h4>
-
-              <div className="mt-1">
-                <p className="">{campaign.description}</p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <p>🛍️</p>
-        )}
-
         <div className="flex-1">
           <h5 className="text-white">Pay using Metamask Wallet</h5>
           <p className="text-left">
@@ -209,6 +142,76 @@ export function CampaignDetails() {
           </div>
         </div>
       </div>
+
+      {campaign ? (
+        <div className="p-5 pb-2">
+          <h4>Supported Campaign Details</h4>
+          <div className="w-100 d-flex justify-content-around align-items-center mt-2">
+            <div className="flex-1">
+              <img
+                src={campaign?.image}
+                alt="campaign"
+                className="w-100 object-fit-cover rounded-5"
+              />
+              {/* <div className="mt-2 bg-secondary">
+            <div
+              className="bg-dark-subtle"
+              style={{
+                width: `${calculateBarPercentage(
+                  state.targetGoal,
+                  state.amountCollected
+                )}%`,
+                maxWidth: "100%",
+              }}
+            ></div>
+          </div> */}
+            </div>
+
+            <div className="w-100 d-flex flex-row justify-content-center align-items-center">
+              <CountBox title="Days Left" value={remainingDays} />
+              <CountBox
+                title={`Raised of ${campaign?.targetGoal}`}
+                value={campaign?.amountCollected}
+              />
+              <CountBox title="Total Donators" value={donators.length} />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <p>🛍️ This is a direct purchase with no associated campaign.</p>
+      )}
+
+      {campaign ? (
+        <div className="flex-2 d-flex flex-column p-5 pt-0">
+          <div>
+            <h5 className="text-white uppercase">Creator</h5>
+
+            <div className="my-2 d-flex flex-row align-items-center">
+              <div className="w-25 h-25 d-flex align-items-center justify-content-center rounded-5 cursor-pointer">
+                <img
+                  src={thirdweb}
+                  alt="user"
+                  className="w-25 h-25 object-fit-contain"
+                />
+              </div>
+              <div>
+                <h5 className="text-white">{campaign.owner}</h5>
+                <p className="my-1">Owner Campaign</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h5 className="text-white text-uppercase">Description</h5>
+
+            <div className="mt-1">
+              <p className="">{campaign.description}</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <p></p>
+      )}
     </div>
   );
 }
