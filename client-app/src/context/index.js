@@ -1,10 +1,10 @@
 import React, { useContext, createContext } from "react";
 import { useAddress, useContract, useContractWrite } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
-import {
-  CommonSymbolSchema,
-  EditionMetadataWithOwnerOutputSchema,
-} from "@thirdweb-dev/sdk";
+// import {
+//   CommonSymbolSchema,
+//   EditionMetadataWithOwnerOutputSchema,
+// } from "@thirdweb-dev/sdk";
 import { useMetamask, useDisconnect } from "@thirdweb-dev/react";
 import CooperativeCharityABI from "../CooperativeCharityABI.json";
 
@@ -15,11 +15,7 @@ export const StateContextProvider = ({ children }) => {
     "0x5FbDB2315678afecb367f032d93F642f64180aa3",
     CooperativeCharityABI
   );
-  //
-  // "0xbdEd0D2bf404bdcBa897a74E6657f1f12e5C6fb6" ->when user2 deploy
-  // "0x663F3ad617193148711d28f5334eE4Ed07016602" ->when user1 deploy
 
-  // );
   const { mutateAsync: createCampaign } = useContractWrite(
     contract,
     "createCampaign"
@@ -32,14 +28,6 @@ export const StateContextProvider = ({ children }) => {
 
   const publishCampaign = async (form) => {
     try {
-      // console.log(
-      //   address,
-      //   form.title,
-      //   form.image,
-      //   form.targetGoal,
-      //   form.description,
-      //   new Date(form.deadline).getTime()
-      // );
       const data = await createCampaign({
         args: [
           address, // owner
@@ -93,25 +81,6 @@ export const StateContextProvider = ({ children }) => {
     return filteredCampaigns;
   };
 
-  // const donate = async (
-  //   pId,
-  //   price,
-  //   amount,
-  //   donate_percentage,
-  //   store_address
-  // ) => {
-  //   // console.log(price);
-  //   const data = await contract.call(
-  //     "donateToCampaign",
-  //     [pId, ethers.utils.parseEther(price), donate_percentage, store_address],
-  //     {
-  //       value: ethers.utils.parseEther(amount),
-  //     }
-  //   );
-
-  //   console.log(data);
-  //   return data;
-  // };
   const donate = async (
     pId,
     price,
@@ -155,17 +124,6 @@ export const StateContextProvider = ({ children }) => {
 
   const getCharityOrgs = async () => {
     const charitys = await contract.call("getCharityOrgs");
-    // const numberOfDonations = donations[0].length;
-
-    // const parsedDonations = [];
-
-    // for (let i = 0; i < numberOfDonations; i++) {
-    //   parsedDonations.push({
-    //     donator: donations[0][i],
-    //     donation: ethers.utils.formatEther(donations[1][i].toString()),
-    //   });
-    // }
-
     return charitys;
   };
 

@@ -26,7 +26,6 @@ export function Navbar() {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
-  // Fetch wallet balance when connected
   const fetchBalance = async () => {
     if (address && window.ethereum) {
       try {
@@ -40,7 +39,6 @@ export function Navbar() {
     }
   };
 
-  // Handle MetaMask connection and updates
   useEffect(() => {
     checkMetaMask();
     fetchBalance();
@@ -49,7 +47,7 @@ export function Navbar() {
   return (
     <div className="Navbar d-flex flex-row justify-content-end m-3">
       <div className="d-flex column-gap-4 align-items-center">
-        {/* Show error message if MetaMask is not installed */}
+        {/*error message if MetaMask is not installed */}
         {errorMessage && (
           <p style={{ color: "red", marginRight: "10px" }}>{errorMessage}</p>
         )}
@@ -81,7 +79,7 @@ export function Navbar() {
           handleClick={() => {
             if (address) {
               disconnect();
-              setBalance(null); // Clear balance on disconnect
+              setBalance(null);
             } else {
               connect();
             }

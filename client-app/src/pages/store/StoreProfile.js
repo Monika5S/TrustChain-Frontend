@@ -39,21 +39,18 @@ export function StoreProfile() {
       const storedUser = JSON.parse(localStorage.getItem("user"));
       const profileDoc = doc(db, "storeProfiles", storedUser.uid);
 
-      // Ensure email and storeId are always set from the authenticated user's data
       const dataToSave = {
         ...profileData,
-        email: storedUser.email, // Ensure email is the authenticated user's email
+        email: storedUser.email,
         storeId: storedUser.uid,
       };
 
-      // Update or set the profile data in Firestore
       if (profile) {
         await updateDoc(profileDoc, dataToSave);
       } else {
         await setDoc(profileDoc, dataToSave);
       }
 
-      // Update the state and close the editing mode
       setProfile(dataToSave);
       setIsEditing(false);
       setError("");
@@ -68,7 +65,6 @@ export function StoreProfile() {
       {error && <p className="error">{error}</p>}
 
       {isEditing ? (
-        // Pass profile data to the ProfileForm with the handleSaveProfile callback
         <ProfileForm profile={profile} onSave={handleSaveProfile} />
       ) : (
         <div className="p-4 text-white">

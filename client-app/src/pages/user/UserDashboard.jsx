@@ -1,4 +1,3 @@
-// src/pages/UserDashboard.js
 import React from "react";
 import "../../styles/Home.css";
 import { Navbar, Sidebar } from "../../components";

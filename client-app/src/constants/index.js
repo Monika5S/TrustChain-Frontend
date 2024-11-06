@@ -14,34 +14,18 @@ export const navlinks = {
       imgUrl: dashboard,
       link: "/user-dashboard/products",
     },
-    // {
-    //   name: "campaign",
-    //   imgUrl: createCampaign,
-    //   link: "/user-dashboard/campaigns",
-    // },
 
     {
       name: "payments",
       imgUrl: payment,
       link: "/user-dashboard/payments",
     },
-    // {
-    //   name: 'withdraw',
-    //   imgUrl: withdraw,
-    //   link: '/',
-    //   disabled: true,
-    // },
+
     {
       name: "profile",
       imgUrl: profile,
       link: "/user-dashboard/profile",
     },
-    // {
-    //   name: "logout",
-    //   imgUrl: logout,
-    //   link: "/",
-    //   disabled: true,
-    // },
   ],
   store: [
     {

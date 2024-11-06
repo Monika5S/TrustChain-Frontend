@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth"; // Import signOut from Firebase
-import { auth } from "../firebase"; // Ensure you import your auth instance
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import { logo, logout, sun } from "../assets";
 import { navlinks } from "../constants";
 
@@ -33,10 +33,10 @@ export function Sidebar(props) {
   // Handle Logout Function
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Sign out the user
-      navigate("/"); // Redirect to the home page
+      await signOut(auth);
+      navigate("/");
     } catch (error) {
-      console.error("Logout Error:", error); // Handle any errors during logout
+      console.error("Logout Error:", error);
     }
   };
 
@@ -58,17 +58,6 @@ export function Sidebar(props) {
             }}
           />
         ))}
-
-        {/* Theme toggle button */}
-        {/* <Icon styles="mt-5 bg-dark shadow-secondary" imgUrl={sun} /> */}
-
-        {/* Logout Button */}
-        {/* <Icon
-          styles="mt-5"
-          // className="logout-button btn btn-danger mt-4 p-2 rounded"
-          imgUrl={logout}
-          onClick={handleLogout}
-        /> */}
 
         <button
           className="logout-button btn btn-primary mt-4 p-2 rounded"

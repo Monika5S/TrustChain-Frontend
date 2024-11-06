@@ -2,28 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CampaignCard } from "./CampaignCard";
 import { loader } from "../assets";
-import { providers } from "ethers";
+// import { providers } from "ethers";
 
 export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
   const navigate = useNavigate();
 
   function handleNavigate(campaign) {
-    // console.log( product);
     navigate(`/user-dashboard/campaigns/${campaign.title}`, {
       state: { ...product, campaign },
     });
   }
-
-  // var filteredCampaigns = campaigns; <- show this as an or option
-  //show what product supports campaign
-  // const filteredCampaigns =
-  //   product.support_cause !== "all"
-  //     ? campaigns
-  //     : campaigns.filter(
-  //         (campaign) =>
-  //           campaign.support_keyword === product.support_cause &&
-  //           campaign.charity_org === product.charity_org
-  //       );
 
   // Filter campaigns based on the product's charity organization and support cause
   const campaignsByOrgAndCause = campaigns.filter(
@@ -36,20 +24,12 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
     (campaign) => campaign.support_keyword === product.support_cause
   );
 
-  // Determine which campaigns to display
   const filteredCampaigns =
     campaignsByOrgAndCause.length > 0
       ? campaignsByOrgAndCause
       : campaignsByCauseOnly.length > 0
       ? campaignsByCauseOnly
       : campaigns;
-
-  // if (product.support_cause !== "all") {
-  //   // filtered
-  //   campaigns = campaigns.filter(
-  //     (campaign) => campaign.support_keyword === product.support_cause
-  //   );
-  // }
 
   console.log(product);
   return (

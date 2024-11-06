@@ -1,6 +1,5 @@
-// src/components/ProfileForm.js
 import React, { useState, useEffect } from "react";
-import { useStateContext } from "../context"; // Assuming useStateContext is available for context
+import { useStateContext } from "../context";
 
 export function ProfileForm({ profile, onSave }) {
   const [formData, setFormData] = useState({
@@ -13,7 +12,7 @@ export function ProfileForm({ profile, onSave }) {
   const [error, setError] = useState("");
 
   const [charity_orgs, setCharityOrgs] = useState([]);
-  // Getting contract from context
+
   const { contract, address, getCharityOrgs } = useStateContext();
 
   const causes = [
@@ -27,7 +26,7 @@ export function ProfileForm({ profile, onSave }) {
   // Function to fetch charity organizations from the contract
   async function fetchCharityOrgs() {
     try {
-      const orgs = await getCharityOrgs(); // Call the function from the context
+      const orgs = await getCharityOrgs();
       setCharityOrgs(orgs);
     } catch (error) {
       console.error("Failed to fetch charity organizations:", error);
@@ -56,7 +55,7 @@ export function ProfileForm({ profile, onSave }) {
       return;
     }
 
-    onSave(formData); // Save the profile data
+    onSave(formData);
   };
 
   return (
@@ -72,16 +71,6 @@ export function ProfileForm({ profile, onSave }) {
           required
         />
       </div>
-      {/* <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div> */}
       <div>
         <label>Cause:</label>
         <select

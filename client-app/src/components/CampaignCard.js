@@ -64,6 +64,3 @@ export function CampaignCard({
     </div>
   );
 }
-// export function CampaignCard() {
-//   return <div>Campaign Card</div>;
-// }

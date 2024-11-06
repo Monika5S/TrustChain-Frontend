@@ -8,7 +8,7 @@ import { useStateContext } from "../../context";
 export function CreateCampaigns() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const { createCampaign, address } = useStateContext(); // Access the address from context
+  const { createCampaign, address } = useStateContext();
   const [form, setForm] = useState({
     name: "",
     title: "",
@@ -20,7 +20,6 @@ export function CreateCampaigns() {
     support_keyword: "all",
   });
 
-  // handles key presses event and updates the new field value
   function handleFormFieldChange(fieldName, e) {
     setForm({ ...form, [fieldName]: e.target.value });
   }
@@ -42,18 +41,15 @@ export function CreateCampaigns() {
 
     checkIfImage(form.image, async (exists) => {
       if (exists) {
-        setIsLoading(true); // while campaign is being created!
+        setIsLoading(true);
         try {
-          // Attempt to create the campaign
           await createCampaign({
             ...form,
             targetGoal: ethers.utils.parseEther(form.targetGoal),
           });
 
-          // If successful, navigate to the dashboard
           navigate("/charity-dashboard");
         } catch (error) {
-          // Handle specific error scenarios
           if (error.message.includes("User rejected")) {
             alert("Transaction was rejected. Please try again.");
           } else {
@@ -61,7 +57,7 @@ export function CreateCampaigns() {
             alert("Error creating campaign. Please try again.");
           }
         } finally {
-          setIsLoading(false); // Reset loading state
+          setIsLoading(false);
         }
       } else {
         alert("Provide a valid image URL");

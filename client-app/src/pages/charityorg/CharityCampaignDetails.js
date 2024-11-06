@@ -40,24 +40,12 @@ export function CharityCampaignDetails() {
             alt="campaign"
             className="w-100 object-fit-cover rounded-5"
           />
-          {/* <div className="mt-2 bg-secondary">
-            <div
-              className="bg-dark-subtle"
-              style={{
-                width: `${calculateBarPercentage(
-                  state.targetGoal,
-                  state.amountCollected
-                )}%`,
-                maxWidth: "100%",
-              }}
-            ></div>
-          </div> */}
         </div>
 
         <div className="w-100 d-flex flex-column justify-content-center align-items-center">
           <CountBox title="Days Left" value={remainingDays} />
           <CountBox
-            title={`Raised of ${campaign.target}`}
+            title={`Raised of ${campaign.targetGoal}`}
             value={campaign.amountCollected}
           />
           <CountBox title="Total Donators" value={donators.length} />

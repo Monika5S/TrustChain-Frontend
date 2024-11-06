@@ -11,7 +11,7 @@ export function CharityCampaigns() {
   async function fetchCampaigns() {
     setIsLoading(true);
     const data = await getUserCampaigns();
-    setCampaigns(data); //campaigns data to be shown on home page
+    setCampaigns(data);
     setIsLoading(false);
   }
 
@@ -22,7 +22,6 @@ export function CharityCampaigns() {
 
   return (
     <div className="w-100">
-      {/* <h1>All Created campaigns</h1> */}
       <DisplayCharityCampaigns
         title="All Campaigns"
         isLoading={isLoading}
