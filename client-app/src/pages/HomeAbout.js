@@ -19,10 +19,14 @@ function HomeAbout() {
           <nav>
             <ul>
               <li>
-                <Link to="/login">Login</Link>
+                <Link to="/login" className="fw-bold">
+                  Login
+                </Link>
               </li>
               <li>
-                <Link to="/sign-up">Sign Up</Link>
+                <Link to="/sign-up" className="fw-bold">
+                  Sign Up
+                </Link>
               </li>
             </ul>
           </nav>
@@ -38,20 +42,18 @@ function HomeAbout() {
           </p>
           <h6>Support a Charity</h6>
           <p>
-            When you select a product, you'll also choose a charity campaign to
-            support based on the store's selected cause (e.g., education,
-            healthcare).
+            When you select a product, you'll also choose a charity campaign
+            from store supported charity organization.
           </p>
           <h6>Purchase and Donate</h6>
           <p>
             Complete your purchase using your wallet (MetaMask), and watch as a
-            portion of your payment is directly transferred to the
-            charity—ensuring transparency every step of the way.
+            portion of your payment is directly transferred to the charity.
           </p>
-          <h6>Get Your Donation Receipt</h6>
+          <h6>Get Your Payment Receipt</h6>
           <p>
-            After your purchase, you'll receive a donation receipt for tax
-            purposes, showing the amount donated and the charity it was sent to.
+            After your purchase, you'll receive a transaction receipt with order
+            and donation details.
           </p>
         </div>
 
