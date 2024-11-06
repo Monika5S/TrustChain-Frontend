@@ -41,9 +41,12 @@ export function Sidebar(props) {
   };
 
   return (
-    <div className="Sidebar d-flex flex-column">
-      <Link to="/">
-        <Icon styles="bg-dark p-3" imgUrl={logo} />
+    <div className="Sidebar d-flex flex-column position-sticky top-0 vh-100">
+      <Link to="/" className="text-decoration-none mb-5">
+        <Icon styles="bg-dark border border-0 p-3 mb-0" imgUrl={logo} />
+        <p className="mb-0 ps-3 mt-0 pt-0 fs-5 text-subtle-dark fw-bold">
+          TRUSTCHAIN
+        </p>
       </Link>
 
       <div className="nav-links d-flex flex-column justify-content-between align-items-center bg-transparent rounded p-1 m-2 ">
@@ -60,7 +63,7 @@ export function Sidebar(props) {
         ))}
 
         <button
-          className="logout-button btn btn-primary mt-4 p-2 rounded"
+          className="logout-button btn btn-primary mt-5 p-2 rounded"
           onClick={handleLogout}
         >
           <img src={logout} alt="Logout" className="me-2" />
