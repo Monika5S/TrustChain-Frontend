@@ -6,6 +6,7 @@ import {
   AllProducts,
   ProductDetails,
   UserProfile,
+  PurchasedProducts,
   PaymentHistory,
   CreateCampaigns,
   CharityCampaigns,
@@ -64,6 +65,7 @@ export default function App() {
             <Route path="products/:id" element={<ProductDetails />} />
             <Route path="profile" element={<UserProfile />} />
             <Route path="payments" element={<PaymentHistory />} />
+            <Route path="purchased-products" element={<PurchasedProducts />} />
           </Route>
         </Routes>
       </div>

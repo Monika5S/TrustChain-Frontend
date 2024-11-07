@@ -14,4 +14,5 @@ export { CampaignDetails } from "./user/CampaignDetails";
 export { AllProducts } from "./user/AllProducts";
 export { ProductDetails } from "./user/ProductDetails";
 export { UserProfile } from "./user/UserProfile";
+export { PurchasedProducts } from "./user/PurchasedProducts";
 export { PaymentHistory } from "./user/PaymentHistory";

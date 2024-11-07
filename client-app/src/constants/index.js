@@ -2,6 +2,8 @@ import {
   createCampaign,
   dashboard,
   logout,
+  menu,
+  money,
   payment,
   profile,
   withdraw,
@@ -13,6 +15,12 @@ export const navlinks = {
       name: "dashboard",
       imgUrl: dashboard,
       link: "/user-dashboard/products",
+    },
+
+    {
+      name: "purchasedproducts",
+      imgUrl: createCampaign,
+      link: "/user-dashboard/purchased-products",
     },
 
     {
@@ -39,7 +47,7 @@ export const navlinks = {
       link: "/store-dashboard/create-product",
     },
     {
-      name: "payments",
+      name: "orders",
       imgUrl: payment,
       link: "/store-dashboard/orders",
     },
