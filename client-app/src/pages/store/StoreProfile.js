@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  writeBatch,
+} from "firebase/firestore";
 import { ProfileForm } from "../../components";
 
 export function StoreProfile() {
@@ -33,6 +43,33 @@ export function StoreProfile() {
     }
   }, []);
 
+  // Updates the products with the new profile data
+  const updateProductsWithProfileData = async (
+    storeId,
+    charity_org,
+    donationPercentage
+  ) => {
+    try {
+      const productsRef = collection(db, "products");
+      const q = query(productsRef, where("storeId", "==", storeId));
+      const querySnapshot = await getDocs(q);
+
+      const batch = writeBatch(db);
+      querySnapshot.forEach((doc) => {
+        const productRef = doc.ref;
+        batch.update(productRef, {
+          charity_org: charity_org,
+          donation_percentage: donationPercentage,
+        });
+      });
+
+      await batch.commit();
+      console.log("Products successfully updated with new profile data.");
+    } catch (error) {
+      console.error("Error updating products:", error);
+    }
+  };
+
   // Handles saving the profile data
   const handleSaveProfile = async (profileData) => {
     try {
@@ -45,16 +82,25 @@ export function StoreProfile() {
         storeId: storedUser.uid,
       };
 
+      // Save store profile data
       if (profile) {
         await updateDoc(profileDoc, dataToSave);
       } else {
         await setDoc(profileDoc, dataToSave);
       }
 
+      // Update products with new profile values
+      await updateProductsWithProfileData(
+        storedUser.uid,
+        profileData.charity_org,
+        profileData.donationPercentage
+      );
+
       setProfile(dataToSave);
       setIsEditing(false);
       setError("");
     } catch (err) {
+      console.error("Failed to save profile:", err);
       setError("Failed to save profile. Please try again.");
     }
   };

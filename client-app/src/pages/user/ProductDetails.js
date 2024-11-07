@@ -1,23 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CustomButton } from "../../components";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 export function ProductDetails() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  function handleBuy(e) {
-    console.log(state);
+  const [storeDetails, setStoreDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchStoreDetails = async () => {
+      try {
+        const storeDocRef = doc(db, "storeProfiles", state.storeId);
+        const storeDoc = await getDoc(storeDocRef);
+
+        if (storeDoc.exists()) {
+          setStoreDetails(storeDoc.data());
+        } else {
+          console.error("No store profile found for this product.");
+        }
+      } catch (error) {
+        console.error("Error fetching store details:", error);
+      }
+    };
+
+    fetchStoreDetails();
+  }, [state.storeId]);
+
+  function handleBuy() {
     const product = {
       name: state.name,
       img: state.img_url,
       price: state.price,
       desc: state.desc,
-      donation_percentage: state.donation_percentage,
-      store_address: state.store_address,
+      donation_percentage:
+        storeDetails?.donationPercentage || state.donation_percentage,
+      store_address: storeDetails?.store_address || state.store_address,
     };
 
-    if (state.donation_percentage < 1) {
-      // Navigate to the campaign details page with only product data
+    if (product.donation_percentage < 1) {
       navigate("/user-dashboard/campaigns/none", { state: { product } });
     } else {
       navigate("/user-dashboard/campaigns", { state: { product } });
@@ -60,11 +82,21 @@ export function ProductDetails() {
         <div>
           <h4 className="text-white text-uppercase">{state.name}</h4>
           <div className="mt-1">
-            <p className="">{state.desc}</p>
+            <p>{state.desc}</p>
+            <p>{state.more}</p>
           </div>
-          <div className="mt-1">
-            <p className="">{state.more}</p>
-          </div>
+
+          <h6 className="py-3">Store and Charity Details</h6>
+          {storeDetails ? (
+            <>
+              <p>Store Name: {storeDetails.storeName}</p>
+              <p>Supported Charity Organization: {storeDetails.charity_org}</p>
+              <p>Donation Percentage: {storeDetails.donationPercentage}%</p>
+              <p>Store MetaMask Wallet Address: {storeDetails.store_address}</p>
+            </>
+          ) : (
+            <p>Loading store details...</p>
+          )}
         </div>
       </div>
     </div>
