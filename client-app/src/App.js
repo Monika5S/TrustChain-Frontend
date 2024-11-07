@@ -17,6 +17,7 @@ import {
   StoreProductDetails,
   CreateProduct,
   Orders,
+  DonationDetails,
 } from "./pages";
 import HomeAbout from "./pages/HomeAbout";
 import SignUp from "./pages/SignUp";
@@ -54,6 +55,8 @@ export default function App() {
               path="charity-campaigns/:id"
               element={<CharityCampaignDetails />}
             />
+            <Route path="donations" element={<DonationDetails />} />
+
             <Route path="profile" element={<Profile />} />
           </Route>
 

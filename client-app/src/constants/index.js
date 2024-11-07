@@ -69,6 +69,11 @@ export const navlinks = {
       link: "/charity-dashboard/create-campaign",
     },
     {
+      name: "donations",
+      imgUrl: payment,
+      link: "/charity-dashboard/donations",
+    },
+    {
       name: "profile",
       imgUrl: profile,
       link: "/charity-dashboard/profile",
