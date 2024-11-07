@@ -7,6 +7,7 @@ export { CreateProduct } from "./store/CreateProduct";
 export { StoreOwnerProducts } from "./store/StoreOwnerProducts";
 export { StoreProductDetails } from "./store/StoreProductDetails";
 export { StoreProfile } from "./store/StoreProfile";
+export { Orders } from "./store/Orders";
 
 export { AllCampaigns } from "./user/AllCampaigns";
 export { CampaignDetails } from "./user/CampaignDetails";

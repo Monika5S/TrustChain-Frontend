@@ -15,6 +15,7 @@ import {
   StoreOwnerProducts,
   StoreProductDetails,
   CreateProduct,
+  Orders,
 } from "./pages";
 import HomeAbout from "./pages/HomeAbout";
 import SignUp from "./pages/SignUp";
@@ -40,6 +41,7 @@ export default function App() {
             <Route path="products" element={<StoreOwnerProducts />} />
             <Route path="products/:id" element={<StoreProductDetails />} />
             <Route path="create-product" element={<CreateProduct />} />
+            <Route path="orders" element={<Orders />} />
             <Route path="store-profile" element={<StoreProfile />} />
           </Route>
 

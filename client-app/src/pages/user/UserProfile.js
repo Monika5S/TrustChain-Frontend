@@ -42,7 +42,7 @@ export function UserProfile() {
       const dataToSave = {
         ...profileData,
         email: storedUser.email,
-        storeId: storedUser.uid,
+        customerId: storedUser.uid,
       };
 
       if (profile) {

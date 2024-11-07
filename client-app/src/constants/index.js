@@ -39,6 +39,11 @@ export const navlinks = {
       link: "/store-dashboard/create-product",
     },
     {
+      name: "payments",
+      imgUrl: payment,
+      link: "/store-dashboard/orders",
+    },
+    {
       name: "profile",
       imgUrl: profile,
       link: "/store-dashboard/store-profile",
