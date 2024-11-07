@@ -99,9 +99,9 @@ function SignUp() {
             required
           >
             <option value="">Select Category</option>
-            <option value="user">User</option>
+            <option value="user">Customer</option>
             <option value="charity-org">Charity Organization</option>
-            <option value="store">Store</option>
+            <option value="store">Cooperative Store</option>
           </select>
           {category === "charity-org" && (
             <input

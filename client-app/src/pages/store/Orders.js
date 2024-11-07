@@ -94,7 +94,7 @@ export function Orders() {
               className="order-item border border-3 rounded-5 p-4 my-4 mb-5 text-white"
             >
               <h5>Product Name: {order.productName}</h5>
-              <p>Buyer Wallet: {order.userWallet}</p>
+              <p>Buyer Metamask Address: {order.userWallet}</p>
               <p>Name: {order.userName}</p>
               <p>Email: {order.userEmail}</p>
               <br />
@@ -103,8 +103,8 @@ export function Orders() {
               <p>Donated Amount: {order.donatedAmount} ETH</p>
               {order.charityWallet && (
                 <>
-                  <p>Campaign: {order.campaignTitle}</p>
-                  <p>Charity Wallet: {order.charityWallet}</p>
+                  <p>Supported Campaign: {order.campaignTitle}</p>
+                  <p>Charity Metamask Address: {order.charityWallet}</p>
                 </>
               )}
               <br />
