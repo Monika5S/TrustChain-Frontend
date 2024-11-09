@@ -130,7 +130,7 @@ export function CreateCampaigns() {
         <div className="d-flex column-gap-4">
           <FormField
             labelName="Charity Organization Name *"
-            placeholder="Mention the cause campaign supports (education, healthcare, etc.)"
+            placeholder="Mention the charity name"
             inputType="text"
             value={form.charity_org}
             handleChange={(e) => handleFormFieldChange("charity_org", e)}

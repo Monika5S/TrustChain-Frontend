@@ -8,8 +8,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
 const allowedNgos = {
-  ngo123: "ngo123@example.com",
-  ngo456: "ngo456@example.com",
+  ngo123: "ayushisen077@gmail.com",
   ngo789: "savy15.student@gmail.com",
 };
 

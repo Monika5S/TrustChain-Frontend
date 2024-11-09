@@ -12,6 +12,7 @@ export function CharityCampaigns() {
     setIsLoading(true);
     const data = await getUserCampaigns();
     setCampaigns(data);
+    console.log(data);
     setIsLoading(false);
   }
 

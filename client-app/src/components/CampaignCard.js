@@ -18,7 +18,7 @@ export function CampaignCard({
 
   return (
     <div
-      className="CampaignCard rounded-3  border border-2 cursor-pointer"
+      className="CampaignCard rounded-3  w-100 border border-2 cursor-pointer"
       onClick={handleClick}
     >
       <img

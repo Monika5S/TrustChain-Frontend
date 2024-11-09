@@ -38,40 +38,81 @@ export function DisplayCampaigns({ title, isLoading, campaigns, product }) {
         {title} ({campaigns.length})
       </h1>
       <h6 className="text-white text-center p-2">
-        select a charity campaign of your choice to continue the product
+        Select a charity campaign of your choice to continue the product
         purchase!
       </h6>
 
-      <div className="w-100 d-flex mt-4 column-gap-4 text-white justify-content-around align-items-start">
+      <div className="d-flex flex-wrap justify-content-center align-items-start gap-4 mt-4 text-white">
         {isLoading ? (
           <img src={loader} alt="loader" className="w-25 h-25" />
-        ) : (
-          ""
-        )}
+        ) : null}
 
         {!isLoading && campaigns.length === 0 ? (
           <p className="text-white">There is No Campaign yet!</p>
-        ) : (
-          ""
-        )}
+        ) : null}
 
         {!isLoading && campaigns.length > 0
           ? filteredCampaigns.map((campaign) => (
-              <CampaignCard
+              <div
+                className="campaign-card border border-2 rounded p-3"
+                style={{ flex: "0 0 32%", maxWidth: "32%", cursor: "pointer" }}
                 key={campaign.id}
-                {...campaign}
-                handleClick={() => handleNavigate(campaign)}
-              />
+                onClick={() => handleNavigate(campaign)}
+              >
+                <CampaignCard {...campaign} />
+              </div>
             ))
           : "No data available!"}
+
         {0 === 1 ? (
           <div>
             {product.price}, {product.img_url}, {product.name}
           </div>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </div>
   );
 }
+//   return (
+//     <div className="px-4 w-100">
+//       <h1 className="text-white text-center">
+//         {title} ({campaigns.length})
+//       </h1>
+//       <h6 className="text-white text-center p-2">
+//         select a charity campaign of your choice to continue the product
+//         purchase!
+//       </h6>
+
+//       <div className="w-100 d-flex mt-4 column-gap-4 text-white justify-content-around align-items-start">
+//         {isLoading ? (
+//           <img src={loader} alt="loader" className="w-25 h-25" />
+//         ) : (
+//           ""
+//         )}
+
+//         {!isLoading && campaigns.length === 0 ? (
+//           <p className="text-white">There is No Campaign yet!</p>
+//         ) : (
+//           ""
+//         )}
+
+//         {!isLoading && campaigns.length > 0
+//           ? filteredCampaigns.map((campaign) => (
+//               <CampaignCard
+//                 key={campaign.id}
+//                 {...campaign}
+//                 handleClick={() => handleNavigate(campaign)}
+//               />
+//             ))
+//           : "No data available!"}
+//         {0 === 1 ? (
+//           <div>
+//             {product.price}, {product.img_url}, {product.name}
+//           </div>
+//         ) : (
+//           ""
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
