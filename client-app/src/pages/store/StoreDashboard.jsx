@@ -12,7 +12,7 @@ function StoreDashboard() {
       </div>
 
       <div className="d-flex flex-column w-100">
-        {/* <Navbar /> */}
+        <Navbar />
 
         <div className="d-flex justify-content-center align-items-center my-4">
           <Outlet />
