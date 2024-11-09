@@ -113,15 +113,42 @@ export function StoreProfile() {
       {isEditing ? (
         <ProfileForm profile={profile} onSave={handleSaveProfile} />
       ) : (
-        <div className="p-4 text-white">
-          <h2>Profile Details</h2>
-          <p>Store Name: {profile?.storeName}</p>
-          <p>Email: {profile?.email}</p>
-          <p>Cause: {profile?.cause}</p>
-          <p>Support Charity Org: {profile?.charity_org}</p>
-          <p>Donation Percentage: {profile?.donationPercentage}%</p>
-          <p>MetaMask Wallet Address: {profile?.store_address}</p>
-          <button onClick={() => setIsEditing(true)}>Update Profile</button>
+        <div className="p-4 bg-dark text-white rounded shadow-sm">
+          <h2 className="mb-4">Profile Details</h2>
+
+          <div className="mb-3">
+            <strong>Store Name:</strong> <span>{profile?.storeName}</span>
+          </div>
+
+          <div className="mb-3">
+            <strong>Email:</strong> <span>{profile?.email}</span>
+          </div>
+
+          <div className="mb-3">
+            <strong>Cause:</strong> <span>{profile?.cause}</span>
+          </div>
+
+          <div className="mb-3">
+            <strong>Support Charity Org:</strong>{" "}
+            <span>{profile?.charity_org}</span>
+          </div>
+
+          <div className="mb-3">
+            <strong>Donation Percentage:</strong>{" "}
+            <span>{profile?.donationPercentage}%</span>
+          </div>
+
+          <div className="mb-3">
+            <strong>MetaMask Wallet Address:</strong>{" "}
+            <span>{profile?.store_address}</span>
+          </div>
+
+          <button
+            onClick={() => setIsEditing(true)}
+            className="btn btn-warning mt-3 w-50"
+          >
+            Update Profile
+          </button>
         </div>
       )}
     </div>

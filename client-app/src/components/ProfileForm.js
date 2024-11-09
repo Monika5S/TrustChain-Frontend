@@ -1,141 +1,6 @@
-// import React, { useState, useEffect } from "react";
-// import { useStateContext } from "../context";
-
-// export function ProfileForm({ profile, onSave }) {
-//   const [formData, setFormData] = useState({
-//     storeName: profile?.storeName || "",
-//     // email: profile?.email || "",
-//     cause: profile?.cause || "",
-//     charity_org: profile?.charity_org || "",
-//     donationPercentage: profile?.donationPercentage || 1,
-//   });
-//   const [error, setError] = useState("");
-
-//   const [charity_orgs, setCharityOrgs] = useState([]);
-
-//   const { contract, address, getCharityOrgs } = useStateContext();
-
-//   const causes = [
-//     "Education",
-//     "Health",
-//     "Environment",
-//     "Animal Welfare",
-//     "Poverty Alleviation",
-//   ];
-
-//   // Function to fetch charity organizations from the contract
-//   async function fetchCharityOrgs() {
-//     try {
-//       const orgs = await getCharityOrgs();
-//       setCharityOrgs(orgs);
-//     } catch (error) {
-//       console.error("Failed to fetch charity organizations:", error);
-//     }
-//   }
-
-//   // Fetch charity organizations when the component mounts and contract is available
-//   useEffect(() => {
-//     if (contract) {
-//       fetchCharityOrgs();
-//     }
-//   }, [contract]);
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     setError("");
-
-//     // Validate donation percentage
-//     if (formData.donationPercentage < 0 || formData.donationPercentage > 5) {
-//       setError("Donation percentage must be between 0% and 5%.");
-//       return;
-//     }
-
-//     onSave(formData);
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} className="profile-form">
-//       {error && <p className="error">{error}</p>}
-//       <div>
-//         <label>Store Name:</label>
-//         <input
-//           type="text"
-//           name="storeName"
-//           value={formData.storeName}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-//       <div>
-//         <label>Cause:</label>
-//         <select
-//           name="cause"
-//           value={formData.cause}
-//           onChange={handleChange}
-//           required
-//         >
-//           <option value="">Select a Cause</option>
-//           {causes.map((cause) => (
-//             <option key={cause} value={cause}>
-//               {cause}
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-
-//       <div>
-//         <label>Support Charity Organization:</label>
-//         <select
-//           name="charity_org"
-//           value={formData.charity_org}
-//           onChange={handleChange}
-//           // required
-//         >
-//           <option value="">Select a Campaign</option>
-//           {charity_orgs.map((charity_org) => (
-//             <option key={charity_org} value={charity_org}>
-//               {charity_org}
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-//       <div>
-//         <label>Donation Percentage (0% - 5%):</label>
-//         <input
-//           type="number"
-//           name="donationPercentage"
-//           value={formData.donationPercentage}
-//           onChange={handleChange}
-//           min="0"
-//           max="5"
-//         />
-//       </div>
-
-//       <div>
-//         <label>MetaMask Wallet Address:</label>
-//         <input
-//           type="text"
-//           name="store_address"
-//           value={formData.store_address}
-//           onChange={handleChange}
-//           required
-//         />
-//       </div>
-//       <button type="submit">
-//         {profile ? "Update Profile" : "Create Profile"}
-//       </button>
-//     </form>
-//   );
-// }
-
 import React, { useState, useEffect } from "react";
 import { useStateContext } from "../context";
-import { ethers } from "ethers";
+// import { ethers } from "ethers";
 
 export function ProfileForm({ profile, onSave }) {
   const [formData, setFormData] = useState({
@@ -198,7 +63,7 @@ export function ProfileForm({ profile, onSave }) {
       setError("");
     } else {
       setIsAddressVerified(false);
-      alert("MetaMask address does not match the provided store address.");
+      setError("MetaMask address does not match the provided store address.");
     }
   };
 
@@ -222,41 +87,36 @@ export function ProfileForm({ profile, onSave }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="profile-form">
-      {error && <p className="error">{error}</p>}
+    <form
+      onSubmit={handleSubmit}
+      className="profile-form p-4 w-100 border rounded shadow-sm"
+    >
+      {/* Error Message */}
+      {error && <div className="alert alert-danger">{error}</div>}
 
-      <div>
-        <label>Store Name:</label>
+      <div className="mb-3">
+        <label htmlFor="storeName" className="form-label">
+          Store Name
+        </label>
         <input
           type="text"
+          id="storeName"
           name="storeName"
+          className="form-control"
           value={formData.storeName}
           onChange={handleChange}
           required
         />
       </div>
 
-      <div>
-        <label>Cause:</label>
+      <div className="mb-3">
+        <label htmlFor="charity_org" className="form-label">
+          Support Charity Organization
+        </label>
         <select
-          name="cause"
-          value={formData.cause}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select a Cause</option>
-          {causes.map((cause) => (
-            <option key={cause} value={cause}>
-              {cause}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label>Support Charity Organization:</label>
-        <select
+          id="charity_org"
           name="charity_org"
+          className="form-select"
           value={formData.charity_org}
           onChange={handleChange}
         >
@@ -269,44 +129,82 @@ export function ProfileForm({ profile, onSave }) {
         </select>
       </div>
 
-      <div>
-        <label>Donation Percentage (0% - 5%):</label>
-        <input
-          type="number"
-          name="donationPercentage"
-          value={formData.donationPercentage}
-          onChange={handleChange}
-          min="0"
-          max="5"
-        />
+      <div className="mb-3 d-flex justify-content-between column-gap-3">
+        <div>
+          <label htmlFor="cause" className="form-label">
+            Cause
+          </label>
+          <select
+            id="cause"
+            name="cause"
+            className="form-select"
+            value={formData.cause}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select a Cause</option>
+            {causes.map((cause) => (
+              <option key={cause} value={cause}>
+                {cause}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="donationPercentage" className="form-label">
+            Donation Percentage (0% - 5%)
+          </label>
+          <input
+            type="number"
+            id="donationPercentage"
+            name="donationPercentage"
+            className="form-control"
+            value={formData.donationPercentage}
+            onChange={handleChange}
+            min="0"
+            max="5"
+          />
+        </div>
       </div>
 
-      <div>
-        <label>MetaMask Wallet Address:</label>
-        <input
-          type="text"
-          name="store_address"
-          value={formData.store_address}
-          onChange={handleChange}
-          required
-        />
+      <div className="mb-3">
+        <label htmlFor="store_address" className="form-label">
+          MetaMask Wallet Address
+        </label>
+        <div className="d-flex justify-content-between column-gap-3">
+          <input
+            type="text"
+            id="store_address"
+            name="store_address"
+            className="form-control px-2"
+            value={formData.store_address}
+            onChange={handleChange}
+            required
+          />
+
+          {/* Button to verify address */}
+
+          <button
+            type="button"
+            onClick={handleVerifyAddress}
+            className={`btn ${
+              isAddressVerified ? "btn-success" : "btn-danger"
+            }`}
+          >
+            {isAddressVerified ? "Address Verified" : "Verify Address"}
+          </button>
+        </div>
       </div>
 
-      {/* Button to verify address */}
-      <button
-        type="button"
-        onClick={handleVerifyAddress}
-        style={{
-          backgroundColor: isAddressVerified ? "green" : "red",
-          color: "white",
-        }}
-      >
-        {isAddressVerified ? "Address Verified" : "Verify Address"}
-      </button>
-
-      <button type="submit" disabled={!isAddressVerified}>
-        {profile ? "Update Profile" : "Create Profile"}
-      </button>
+      <div className="mb-3">
+        <button
+          type="submit"
+          className="btn btn-primary w-100"
+          disabled={!isAddressVerified}
+        >
+          {profile ? "Update Profile" : "Create Profile"}
+        </button>
+      </div>
     </form>
   );
 }
