@@ -1,8 +1,8 @@
 [
   {
-    "ngoid": "ngo001",
-    "email": "ngo001@example.com",
-    "name": "Helping Hands",
+    "ngoid": "ngo123",
+    "email": "ayushisen077@gmail.com",
+    "name": "Eco Warriors",
     "workingSector": "Healthcare",
     "about": "We aim to provide quality healthcare services to underprivileged communities.",
     "location": "New Delhi, India"
@@ -10,7 +10,7 @@
   {
     "ngoid": "ngo789",
     "email": "savy15.student@gmail.com",
-    "name": "Eco Warriors",
+    "name": "Helping Hands",
     "workingSector": "Environment",
     "about": "Committed to promoting environmental conservation and sustainable practices.",
     "location": "Delhi, India"
