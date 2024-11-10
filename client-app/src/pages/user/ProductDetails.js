@@ -53,7 +53,7 @@ export function ProductDetails() {
           <img
             src={state.img_url}
             alt="product"
-            className="w-100 object-fit-cover rounded-5"
+            className="w-75 object-fit-cover rounded-5"
           />
         </div>
 

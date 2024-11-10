@@ -56,7 +56,7 @@ export function CampaignDetails() {
       const txReceipt = await donate(
         campaign?.pId || 0,
         product.price,
-        amount,
+        product.price,
         donate_percentage,
         product.store_address
       );
@@ -69,11 +69,10 @@ export function CampaignDetails() {
         productName: product.name,
         productPrice: product.price,
         storeWallet: product.store_address,
-
         charityWallet: campaign?.owner || null,
         campaignTitle: campaign?.title || "Direct Purchase",
         campaignId: campaign?.pId || -1,
-        PaidAmount: amount,
+        PaidAmount: product.price,
         donatedAmount: donate_amount,
         timestamp: new Date(),
         transactionHash: transactionHash,
@@ -102,10 +101,10 @@ export function CampaignDetails() {
           <h5 className="text-white">Pay using Metamask Wallet</h5>
           <p className="text-left">
             Empowering change through seamless giving and cooperative support.
-            Eery purchase drives impact.
+            Every purchase drives impact.
           </p>
 
-          <div className="d-flex w-100 border  justify-content-around align-items-center p-3 rounded-3 column-gap-3">
+          <div className="d-flex w-100 border justify-content-around align-items-center p-3 rounded-3 column-gap-3">
             {product ? (
               <div className="w-25 h-25">
                 <img src={product.img} alt={product.name} className="w-100" />
@@ -116,28 +115,37 @@ export function CampaignDetails() {
               <div></div>
             )}
 
-            <div className="mt-3">
-              <input
-                type="number"
-                placeholder="ETH 0.1"
-                step="0.01"
-                className="w-50 py-2 bg-transparent  text-white placeholder:text-[#4b5264] rounded-3"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-              />
-
-              <div className="rounded-3">
-                <h6 className="text-white">
-                  Every contribution counts—give with purpose, shop with heart."
-                </h6>
-              </div>
+            <div>
+              {campaign && (
+                <div className="mt-3 text-left">
+                  <h6>cooperative Store | Donation Breakdown</h6>
+                  <p>
+                    Amount going to the store:{" "}
+                    {product.price -
+                      (product.price * product.donation_percentage) / 100}{" "}
+                    ETH
+                  </p>
+                  <p>
+                    Amount going to charity campaign:{" "}
+                    {(product.price * product.donation_percentage) / 100} ETH
+                  </p>
+                </div>
+              )}
 
               <CustomButton
                 btnType="button"
-                title="PAY"
+                title="Purchase Product"
                 styles="w-auto bg-primary"
                 handleClick={handleDonate}
               />
+              <br />
+
+              <div className="rounded-3 mt-3">
+                <h6 className="text-white">
+                  Every contribution counts—give with purpose, shop with heart
+                  🌞
+                </h6>
+              </div>
             </div>
           </div>
         </div>
