@@ -16,7 +16,7 @@ export function CreateCampaigns() {
     targetGoal: "",
     deadline: "",
     image: "",
-    charity_org: "trustchain",
+    charity_org: "",
     support_keyword: "all",
   });
 

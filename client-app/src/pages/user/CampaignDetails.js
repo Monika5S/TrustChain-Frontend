@@ -50,7 +50,7 @@ export function CampaignDetails() {
 
     try {
       const donate_percentage = product.donation_percentage;
-      const donate_amount = amount * (donate_percentage / 100);
+      const donate_amount = product.price * (donate_percentage / 100);
 
       // Call the donate function and get the transaction receipt
       const txReceipt = await donate(
@@ -159,20 +159,20 @@ export function CampaignDetails() {
               <img
                 src={campaign?.image}
                 alt="campaign"
-                className="w-100 object-fit-cover rounded-5"
+                className="w-75 object-fit-cover rounded-5"
               />
               {/* <div className="mt-2 bg-secondary">
-            <div
-              className="bg-dark-subtle"
-              style={{
-                width: `${calculateBarPercentage(
-                  state.targetGoal,
-                  state.amountCollected
-                )}%`,
-                maxWidth: "100%",
-              }}
-            ></div>
-          </div> */}
+                <div
+                  className="bg-dark-subtle"
+                  style={{
+                    width: `${calculateBarPercentage(
+                      campaign.targetGoal,
+                      campaign.amountCollected
+                    )}%`,
+                    maxWidth: "100%",
+                  }}
+                ></div>
+              </div> */}
             </div>
 
             <div className="w-100 d-flex flex-row justify-content-center align-items-center">
@@ -192,6 +192,16 @@ export function CampaignDetails() {
       {campaign ? (
         <div className="flex-2 d-flex flex-column p-5 pt-0">
           <div>
+            <h5 className="text-white">{campaign.title}</h5>
+
+            <h5 className="text-white text-uppercase">Description</h5>
+
+            <div className="mt-1">
+              <p className="">{campaign.description}</p>
+            </div>
+          </div>
+
+          <div>
             <h5 className="text-white uppercase">Creator</h5>
 
             <div className="my-2 d-flex flex-row align-items-center">
@@ -202,18 +212,11 @@ export function CampaignDetails() {
                   className="w-25 h-25 object-fit-contain"
                 />
               </div>
+
               <div>
                 <h5 className="text-white">{campaign.owner}</h5>
                 <p className="my-1">Owner Campaign</p>
               </div>
-            </div>
-          </div>
-
-          <div>
-            <h5 className="text-white text-uppercase">Description</h5>
-
-            <div className="mt-1">
-              <p className="">{campaign.description}</p>
             </div>
           </div>
         </div>
